@@ -1,15 +1,17 @@
 import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import PopularTools from "@/components/PopularTools";
+import Features from "@/components/Features";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-
-      <main className="flex min-h-screen items-center justify-center">
-        <h2 className="text-5xl font-bold">
-          Selamat Datang di SmartTools Indonesia 🚀
-        </h2>
-      </main>
+      <Hero />
+      <PopularTools />
+      <Features />
+      <Footer />
     </>
   );
 }
