@@ -16,7 +16,7 @@ const tools = [
     title: "Password Generator",
     description: "Buat password yang aman dan kuat hanya dalam sekali klik.",
     icon: "🔐",
-    href: "#",
+    href: "/tools/password-generator",
     users: "18K+",
     rating: "5.0",
   },
