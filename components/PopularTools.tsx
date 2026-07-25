@@ -9,24 +9,32 @@ const tools = [
     description: "Hitung jumlah kata, karakter, paragraf, dan estimasi waktu baca.",
     icon: "📝",
     href: "/tools/word-counter",
+    users: "25K+",
+    rating: "4.9",
   },
   {
     title: "Password Generator",
     description: "Buat password yang aman dan kuat hanya dalam sekali klik.",
     icon: "🔐",
     href: "#",
+    users: "18K+",
+    rating: "5.0",
   },
   {
     title: "QR Code Generator",
     description: "Ubah teks atau link menjadi QR Code dengan cepat.",
     icon: "📱",
     href: "#",
+    users: "15K+",
+    rating: "4.8",
   },
   {
     title: "JSON Formatter",
     description: "Format dan validasi data JSON secara instan.",
     icon: "📄",
     href: "#",
+    users: "12K+",
+    rating: "4.9",
   },
 ];
 
@@ -67,14 +75,29 @@ export default function PopularTools() {
     <h3 className="mt-5 text-xl font-bold text-slate-900 dark:text-white">
       {tool.title}
     </h3>
+    <div className="mt-2 flex items-center gap-2 text-sm">
+  <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
+
+  <span className="font-semibold text-slate-700 dark:text-slate-300">
+    {tool.rating}
+  </span>
+</div>
 
     <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
       {tool.description}
     </p>
 
-    <div className="mt-6 flex items-center font-semibold text-blue-600 transition-all duration-300 group-hover:translate-x-1 dark:text-blue-400">
-      Gunakan →
-    </div>
+    <div className="mt-6 flex items-center justify-between">
+
+  <span className="text-sm text-slate-500 dark:text-slate-400">
+    👥 {tool.users}
+  </span>
+
+  <span className="font-semibold text-blue-600 transition-all duration-300 group-hover:translate-x-1 dark:text-blue-400">
+    Gunakan →
+  </span>
+
+</div>
   </Link>
 </motion.div>
           ))}
