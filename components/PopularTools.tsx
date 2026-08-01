@@ -4,38 +4,38 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const tools = [
-  {
-    title: "Word Counter",
-    description: "Hitung jumlah kata, karakter, paragraf, dan estimasi waktu baca.",
-    icon: "📝",
-    href: "/tools/word-counter",
-    users: "25K+",
-    rating: "4.9",
-  },
-  {
-    title: "Password Generator",
-    description: "Buat password yang aman dan kuat hanya dalam sekali klik.",
-    icon: "🔐",
-    href: "/tools/password-generator",
-    users: "18K+",
-    rating: "5.0",
-  },
-  {
-    title: "QR Code Generator",
-    description: "Ubah teks atau link menjadi QR Code dengan cepat.",
-    icon: "📱",
-    href: "/tools/qr-code-generator",
-    users: "15K+",
-    rating: "4.8",
-  },
-  {
-    title: "JSON Formatter",
-    description: "Format dan validasi data JSON secara instan.",
-    icon: "📄",
-    href: "#",
-    users: "12K+",
-    rating: "4.9",
-  },
+{
+  title: "Password Generator",
+  description: "Generate password yang kuat dan aman.",
+  icon: "🔐",
+  href: "/tools/password-generator",
+  users: "28K+",
+  rating: "4.9",
+},
+{
+  title: "QR Code Generator",
+  description: "Buat QR Code gratis dari teks atau URL.",
+  icon: "📱",
+  href: "/tools/qr-code-generator",
+  users: "18K+",
+  rating: "4.9",
+},
+{
+  title: "Word Counter",
+  description: "Hitung jumlah kata, karakter, dan paragraf.",
+  icon: "📝",
+  href: "/tools/word-counter",
+  users: "15K+",
+  rating: "4.8",
+},
+{
+  title: "JSON Formatter",
+  description: "Format, beautify, minify, dan validasi JSON secara instan.",
+  icon: "📄",
+  href: "/tools/json-formatter",
+  users: "12K+",
+  rating: "4.9",
+},
 ];
 
 export default function PopularTools() {
