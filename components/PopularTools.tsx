@@ -24,7 +24,7 @@ const tools = [
     title: "QR Code Generator",
     description: "Ubah teks atau link menjadi QR Code dengan cepat.",
     icon: "📱",
-    href: "#",
+    href: "/tools/qr-code-generator",
     users: "15K+",
     rating: "4.8",
   },
