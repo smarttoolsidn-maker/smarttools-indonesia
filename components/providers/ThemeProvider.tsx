@@ -6,12 +6,13 @@ export default function ThemeProvider({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) { 
   return (
     <NextThemesProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
+     attribute="class"
+     defaultTheme="system"
+     enableSystem
+     disableTransitionOnChange
     >
       {children}
     </NextThemesProvider>
