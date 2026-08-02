@@ -2,8 +2,9 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import dynamic from "next/dynamic";
 
-export default function ThemeToggle() {
+function ThemeToggleContent() {
   const { resolvedTheme, setTheme } = useTheme();
 
   return (
@@ -22,3 +23,10 @@ export default function ThemeToggle() {
     </button>
   );
 }
+
+export default dynamic(
+  () => Promise.resolve(ThemeToggleContent),
+  {
+    ssr: false,
+  }
+);

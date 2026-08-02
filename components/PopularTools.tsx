@@ -36,6 +36,22 @@ const tools = [
   users: "12K+",
   rating: "4.9",
 },
+{
+  title: "UUID Generator",
+  description: "Generate UUID v4 untuk kebutuhan developer.",
+  icon: "🆔",
+  href: "/tools/uuid-generator",
+  users: "4K+",
+  rating: "4.9",
+},
+{
+  title: "Base64 Encoder",
+  description: "Encode dan Decode Base64 dengan cepat.",
+  icon: "🔐",
+  href: "/tools/base64-encoder",
+  users: "6K+",
+  rating: "4.9",
+},
 ];
 
 export default function PopularTools() {

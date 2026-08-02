@@ -44,6 +44,22 @@ const tools = [
     badge: "Developer",
     color: "bg-indigo-500",
   },
+  {
+  title: "UUID Generator",
+  description: "Generate UUID v4 secara instan dan gratis.",
+  icon: "🆔",
+  href: "/tools/uuid-generator",
+  users: "4K+",
+  rating: "4.9",
+  },
+  {
+  title: "Base64 Encoder",
+  description: "Encode dan Decode Base64 secara instan.",
+  icon: "🔐",
+  href: "/tools/base64-encoder",
+  users: "6K+",
+  rating: "4.9",
+  },
 ];
 
 export default function ToolsPage() {
@@ -75,6 +91,65 @@ export default function ToolsPage() {
     onChange={(e) => setSearch(e.target.value)}
     className="w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-lg outline-none transition focus:border-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
   />
+
+</div>
+<div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+  <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+    <h2 className="text-4xl font-extrabold text-blue-600">
+      5+
+    </h2>
+
+    <p className="mt-2 font-semibold dark:text-white">
+      Free Tools
+    </p>
+
+    <p className="mt-1 text-sm text-slate-500">
+      Siap digunakan gratis.
+    </p>
+  </div>
+
+  <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+    <h2 className="text-4xl font-extrabold text-green-600">
+      100%
+    </h2>
+
+    <p className="mt-2 font-semibold dark:text-white">
+      Browser Based
+    </p>
+
+    <p className="mt-1 text-sm text-slate-500">
+      Tanpa instalasi.
+    </p>
+  </div>
+
+  <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+    <h2 className="text-4xl font-extrabold text-purple-600">
+      24/7
+    </h2>
+
+    <p className="mt-2 font-semibold dark:text-white">
+      Available
+    </p>
+
+    <p className="mt-1 text-sm text-slate-500">
+      Bisa diakses kapan saja.
+    </p>
+  </div>
+
+  <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+    <h2 className="text-4xl font-extrabold text-orange-600">
+      🇮🇩
+    </h2>
+
+    <p className="mt-2 font-semibold dark:text-white">
+      Made in Indonesia
+    </p>
+
+    <p className="mt-1 text-sm text-slate-500">
+      Dibuat untuk semua orang.
+    </p>
+  </div>
 
 </div>
 
