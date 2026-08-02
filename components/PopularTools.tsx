@@ -52,6 +52,14 @@ const tools = [
   users: "6K+",
   rating: "4.9",
 },
+{
+  title: "URL Encoder",
+  description: "Encode dan Decode URL dengan cepat.",
+  icon: "🌐",
+  href: "/tools/url-encoder",
+  users: "5K+",
+  rating: "4.9",
+},
 ];
 
 export default function PopularTools() {
