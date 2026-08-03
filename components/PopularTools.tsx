@@ -109,6 +109,22 @@ const tools = [
   users: "4K+",
   rating: "4.9",
 },
+{
+  title: "JWT Decoder",
+  description: "Decode JWT Header, Payload, dan Expiration.",
+  icon: "🔐",
+  href: "/tools/jwt-decoder",
+  users: "4K+",
+  rating: "4.9",
+},
+{
+title:"Markdown Preview",
+description:"Editor Markdown realtime dengan preview.",
+icon:"📝",
+href:"/tools/markdown-preview",
+users:"5K+",
+rating:"4.9",
+},
 ];
 
 export default function PopularTools() {

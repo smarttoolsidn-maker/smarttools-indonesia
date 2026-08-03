@@ -109,6 +109,22 @@ const tools = [
   users: "4K+",
   rating: "4.9",
 },
+{
+  title: "JWT Decoder",
+  description: "Decode JSON Web Token (JWT) secara instan.",
+  icon: "🔐",
+  href: "/tools/jwt-decoder",
+  users: "4K+",
+  rating: "4.9",
+},
+{
+title:"Markdown Preview",
+description:"Preview Markdown secara realtime.",
+icon:"📝",
+href:"/tools/markdown-preview",
+users:"5K+",
+rating:"4.9",
+},
 ];
 
 export default function ToolsPage() {
