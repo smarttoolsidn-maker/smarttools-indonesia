@@ -68,6 +68,47 @@ const tools = [
   users: "5K+",
   rating: "4.9",
 },
+{
+  title: "Lorem Ipsum Generator",
+  description:
+    "Generate teks Lorem Ipsum dengan jumlah paragraph yang dapat diatur.",
+  icon: "📝",
+  href: "/tools/lorem-ipsum-generator",
+  users: "4K+",
+  rating: "4.9",
+},
+{
+  title: "Text Case Converter",
+  description: "Ubah teks menjadi UPPERCASE, lowercase, Title Case, Sentence Case, atau Toggle Case.",
+  icon: "🔤",
+  href: "/tools/text-case-converter",
+  users: "7K+",
+  rating: "4.9",
+},
+{
+  title: "Hash Generator",
+  description: "Generate MD5, SHA1, SHA256, dan SHA512 secara instan.",
+  icon: "🔐",
+  href: "/tools/hash-generator",
+  users: "6K+",
+  rating: "4.9",
+},
+{
+  title: "Timestamp Converter",
+  description: "Konversi Unix Timestamp ke Date dan sebaliknya.",
+  icon: "⏰",
+  href: "/tools/timestamp-converter",
+  users: "5K+",
+  rating: "4.9",
+},
+{
+  title: "Color Converter",
+  description: "Konversi warna HEX dan RGB dengan live preview.",
+  icon: "🎨",
+  href: "/tools/color-converter",
+  users: "4K+",
+  rating: "4.9",
+},
 ];
 
 export default function ToolsPage() {
