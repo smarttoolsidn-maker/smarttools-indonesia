@@ -1,137 +1,29 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 
-const tools = [
-  {
-    title: "Password Generator",
-    description: "Generate password yang kuat dan aman.",
-    icon: "🔐",
-    href: "/tools/password-generator",
-    badge: "Popular",
-    color: "bg-orange-500",
-  },
-  {
-    title: "QR Code Generator",
-    description: "Generate QR Code secara gratis.",
-    icon: "📱",
-    href: "/tools/qr-code-generator",
-    badge: "New",
-    color: "bg-green-500",
-  },
-  {
-    title: "Word Counter",
-    description: "Hitung kata, karakter, dan paragraf.",
-    icon: "📝",
-    href: "/tools/word-counter",
-    badge: "Updated",
-    color: "bg-blue-500",
-  },
-  {
-    title: "JSON Formatter",
-    description: "Beautify dan Minify JSON.",
-    icon: "📄",
-    href: "/tools/json-formatter",
-    badge: "Developer",
-    color: "bg-purple-500",
-  },
-  {
-    title: "JSON Validator",
-    description: "Validasi struktur JSON secara instan.",
-    icon: "🛡️",
-    href: "/tools/json-validator",
-    badge: "Developer",
-    color: "bg-indigo-500",
-  },
-  {
-  title: "UUID Generator",
-  description: "Generate UUID v4 secara instan dan gratis.",
-  icon: "🆔",
-  href: "/tools/uuid-generator",
-  users: "4K+",
-  rating: "4.9",
-  },
-  {
-  title: "Base64 Encoder",
-  description: "Encode dan Decode Base64 secara instan.",
-  icon: "🔐",
-  href: "/tools/base64-encoder",
-  users: "6K+",
-  rating: "4.9",
-  },
-  {
-  title: "URL Encoder",
-  description: "Encode dan Decode URL secara instan.",
-  icon: "🌐",
-  href: "/tools/url-encoder",
-  users: "5K+",
-  rating: "4.9",
-},
-{
-  title: "Lorem Ipsum Generator",
-  description:
-    "Generate teks Lorem Ipsum dengan jumlah paragraph yang dapat diatur.",
-  icon: "📝",
-  href: "/tools/lorem-ipsum-generator",
-  users: "4K+",
-  rating: "4.9",
-},
-{
-  title: "Text Case Converter",
-  description: "Ubah teks menjadi UPPERCASE, lowercase, Title Case, Sentence Case, atau Toggle Case.",
-  icon: "🔤",
-  href: "/tools/text-case-converter",
-  users: "7K+",
-  rating: "4.9",
-},
-{
-  title: "Hash Generator",
-  description: "Generate MD5, SHA1, SHA256, dan SHA512 secara instan.",
-  icon: "🔐",
-  href: "/tools/hash-generator",
-  users: "6K+",
-  rating: "4.9",
-},
-{
-  title: "Timestamp Converter",
-  description: "Konversi Unix Timestamp ke Date dan sebaliknya.",
-  icon: "⏰",
-  href: "/tools/timestamp-converter",
-  users: "5K+",
-  rating: "4.9",
-},
-{
-  title: "Color Converter",
-  description: "Konversi warna HEX dan RGB dengan live preview.",
-  icon: "🎨",
-  href: "/tools/color-converter",
-  users: "4K+",
-  rating: "4.9",
-},
-{
-  title: "JWT Decoder",
-  description: "Decode JSON Web Token (JWT) secara instan.",
-  icon: "🔐",
-  href: "/tools/jwt-decoder",
-  users: "4K+",
-  rating: "4.9",
-},
-{
-title:"Markdown Preview",
-description:"Preview Markdown secara realtime.",
-icon:"📝",
-href:"/tools/markdown-preview",
-users:"5K+",
-rating:"4.9",
-},
-];
+import { tools } from "@/data/tools";
+
+import ToolGrid from "@/components/ToolGrid";
+
+import FeaturedTools from "@/components/FeaturedTools";
+
 
 export default function ToolsPage() {
   const [search, setSearch] = useState("");
-  const filteredTools = tools.filter((tool) =>
-  tool.title.toLowerCase().includes(search.toLowerCase())
-);
+  const [category, setCategory] = useState("Semua");
+  const filteredTools = tools.filter((tool) => {
+  const matchSearch = tool.title
+    .toLowerCase()
+    .includes(search.toLowerCase());
+
+  const matchCategory =
+    category === "Semua"
+      ? true
+      : tool.category === category;
+
+  return matchSearch && matchCategory;
+});
   return (
     <main className="mx-auto max-w-7xl px-6 py-20">
 
@@ -158,15 +50,64 @@ export default function ToolsPage() {
   />
 
 </div>
+
+<div className="mt-10 text-center">
+
+  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
+
+    Browse By Category
+
+  </p>
+
+</div>
+
+<div className="mt-10 flex flex-wrap justify-center gap-4">
+
+  {[
+  { name: "Semua", icon: "✨" },
+  { name: "Developer", icon: "💻" },
+  { name: "Generator", icon: "⚡" },
+  { name: "Converter", icon: "🔄" },
+  { name: "Text", icon: "📝" },
+  { name: "Utility", icon: "🛠️" },
+  { name: "Color", icon: "🎨" },
+].map((item) => (
+
+  <button
+    key={item.name}
+    onClick={() => setCategory(item.name)}
+    className={`group flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300
+
+      ${
+        category === item.name
+          ? "scale-105 bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+          : "border border-slate-300 bg-white text-slate-700 hover:-translate-y-1 hover:border-blue-500 hover:text-blue-600 hover:shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+      }`}
+  >
+
+    <span className="text-base">
+      {item.icon}
+    </span>
+
+    {item.name}
+
+  </button>
+
+))}
+
+ 
+
+</div>
+
 <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
   <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
     <h2 className="text-4xl font-extrabold text-blue-600">
-      5+
+    {tools.length}+
     </h2>
 
     <p className="mt-2 font-semibold dark:text-white">
-      Free Tools
+      Available Tools
     </p>
 
     <p className="mt-1 text-sm text-slate-500">
@@ -218,62 +159,14 @@ export default function ToolsPage() {
 
 </div>
 
-      <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-
-        {filteredTools.map((tool) => (
-
-          <Link
-            key={tool.title}
-            href={tool.href}
-            className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl dark:border-slate-700 dark:bg-slate-800"
-          >
-
-            <div className="flex items-center justify-between">
-
-              <span className="text-5xl">
-                {tool.icon}
-              </span>
-
-              <span
-                className={`rounded-full ${tool.color} px-3 py-1 text-xs font-bold text-white`}
-              >
-                {tool.badge}
-              </span>
-
-            </div>
-
-            <h2 className="mt-6 text-2xl font-bold dark:text-white">
-              {tool.title}
-            </h2>
-
-            <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">
-              {tool.description}
-            </p>
-
-            <div className="mt-8 flex items-center font-semibold text-blue-600 transition group-hover:translate-x-1">
-              Open Tool →
-            </div>
-
-          </Link>
-
-        ))}
-
-      </div>
-      {filteredTools.length === 0 && (
-
-  <div className="mt-16 text-center">
-
-    <h2 className="text-2xl font-bold dark:text-white">
-      😢 Tool tidak ditemukan
-    </h2>
-
-    <p className="mt-3 text-slate-500">
-      Coba gunakan kata kunci lain.
-    </p>
-
-  </div>
-
+      {search === "" && category === "Semua" && (
+  <FeaturedTools />
 )}
+
+<div className="mt-16">
+  <ToolGrid tools={filteredTools} />
+</div>
+
 
     </main>
   );
