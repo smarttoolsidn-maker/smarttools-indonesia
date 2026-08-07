@@ -9,6 +9,8 @@ interface ActionButtonProps {
 
   color?: "blue" | "green" | "red" | "gray";
 
+  size?: "sm" | "md" | "lg";
+
   loading?: boolean;
 
   disabled?: boolean;
@@ -25,6 +27,7 @@ export default function ActionButton({
   onClick,
   icon,
   color = "blue",
+  size = "md",
   loading = false,
   disabled = false,
   fullWidth = false,
@@ -45,6 +48,14 @@ export default function ActionButton({
       "border border-slate-300 bg-white hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700",
   };
 
+  const sizes = {
+    sm: "px-4 py-2 text-sm",
+
+    md: "px-6 py-3",
+
+    lg: "px-8 py-4 text-lg",
+  };
+
   return (
     <button
       type={type}
@@ -53,7 +64,7 @@ export default function ActionButton({
       className={`
         flex items-center justify-center gap-2
         rounded-2xl
-        px-6 py-3
+        ${sizes[size]}
         font-semibold
         transition-all duration-300
         hover:scale-105
@@ -80,7 +91,7 @@ export default function ActionButton({
             r="10"
             stroke="currentColor"
             strokeWidth="4"
-            opacity="0.25"
+            opacity=".25"
           />
 
           <path

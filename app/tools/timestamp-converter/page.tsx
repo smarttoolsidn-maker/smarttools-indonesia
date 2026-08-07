@@ -2,184 +2,135 @@
 
 import { useState } from "react";
 
-import {
-  Clock3,
-  Copy,
-  Trash2,
-} from "lucide-react";
+import ToolLayout from "@/components/tool/ToolLayout";
+import ToolSection from "@/components/tools/ToolSection";
+import ToolActions from "@/components/tools/ToolActions";
 
-import ToolHeader from "@/components/tools/ToolHeader";
-import ToolTextarea from "@/components/tools/ToolTextarea";
-import StatusAlert from "@/components/tools/StatusAlert";
 import ActionButton from "@/components/tools/ActionButton";
+import StatusAlert from "@/components/tools/StatusAlert";
+
+import TimestampInput from "./components/TimestampInput";
+import TimestampResult from "./components/TimestampResult";
 
 export default function TimestampConverterPage() {
-
   const [timestamp, setTimestamp] = useState("");
-
-  const [dateValue, setDateValue] = useState("");
-
+  const [result, setResult] = useState("");
   const [status, setStatus] = useState("");
 
-  function convertToDate() {
+  function convertTimestamp() {
+    if (!timestamp.trim()) {
+      setStatus("❌ Masukkan Unix Timestamp.");
+      return;
+    }
 
-    if (!timestamp.trim()) return;
+    const unix = Number(timestamp);
 
-    const date = new Date(Number(timestamp) * 1000);
+    if (Number.isNaN(unix)) {
+      setStatus("❌ Timestamp tidak valid.");
+      return;
+    }
 
-    setDateValue(date.toLocaleString());
+    const date = new Date(unix * 1000);
 
-    setStatus("✅ Timestamp berhasil dikonversi");
+    if (isNaN(date.getTime())) {
+      setStatus("❌ Timestamp tidak valid.");
+      return;
+    }
 
-  }
+    setResult(date.toLocaleString("id-ID"));
 
-  function convertToTimestamp() {
-
-    if (!dateValue.trim()) return;
-
-    const unix = Math.floor(
-      new Date(dateValue).getTime() / 1000
-    );
-
-    setTimestamp(unix.toString());
-
-    setStatus("✅ Date berhasil dikonversi");
-
+    setStatus("✅ Berhasil dikonversi.");
   }
 
   function currentTimestamp() {
+    const unix = Math.floor(Date.now() / 1000);
 
-    const now = Math.floor(Date.now() / 1000);
+    setTimestamp(unix.toString());
 
-    setTimestamp(now.toString());
-
-    setDateValue(
-      new Date().toLocaleString()
+    setResult(
+      new Date(unix * 1000).toLocaleString("id-ID")
     );
 
-    setStatus("✅ Current Timestamp berhasil dibuat");
-
+    setStatus("✅ Menggunakan waktu saat ini.");
   }
 
-  async function copyOutput() {
+  async function copyResult() {
+    if (!result) return;
 
-    await navigator.clipboard.writeText(
+    await navigator.clipboard.writeText(result);
 
-      `Timestamp : ${timestamp}
-
-Date : ${dateValue}`
-
-    );
-
-    setStatus("✅ Berhasil disalin");
-
+    setStatus("✅ Hasil berhasil disalin.");
   }
 
   function clearAll() {
-
     setTimestamp("");
-
-    setDateValue("");
-
+    setResult("");
     setStatus("");
-
   }
 
   return (
+    <ToolLayout
+      toolId="timestamp-converter"
+      icon="⏰"
+      title="Timestamp Converter"
+      description="Konversi Unix Timestamp menjadi tanggal dan waktu."
+      category="Developer"
+      badge="Popular"
+      rating="4.9"
+      users="5K+"
+    >
+      <ToolSection title="Input">
 
-    <main className="mx-auto max-w-6xl px-6 py-20">
-
-      <ToolHeader
-        icon="⏰"
-        title="Timestamp Converter"
-        description="Konversi Unix Timestamp menjadi tanggal dan sebaliknya."
-      />
-
-      <div className="mt-12 grid gap-8 lg:grid-cols-2">
-
-        <ToolTextarea
-          label="Unix Timestamp"
+        <TimestampInput
           value={timestamp}
           onChange={setTimestamp}
-          placeholder="Contoh: 1754236800"
         />
 
-        <ToolTextarea
-          label="Date & Time"
-          value={dateValue}
-          onChange={setDateValue}
-          placeholder="Tanggal akan muncul di sini..."
+      </ToolSection>
+
+      <ToolSection title="Result">
+
+        <TimestampResult
+          result={result}
         />
 
-      </div>
+      </ToolSection>
+
+      <ToolActions>
+
+        <ActionButton
+          onClick={convertTimestamp}
+        >
+          Convert
+        </ActionButton>
+
+        <ActionButton
+          color="green"
+          onClick={currentTimestamp}
+        >
+          Current Time
+        </ActionButton>
+
+        <ActionButton
+          color="gray"
+          onClick={copyResult}
+        >
+          Copy
+        </ActionButton>
+
+        <ActionButton
+          color="red"
+          onClick={clearAll}
+        >
+          Clear
+        </ActionButton>
+
+      </ToolActions>
 
       <StatusAlert
         status={status}
       />
-      <div className="mt-8 flex flex-wrap justify-center gap-4">
 
-  <ActionButton
-    onClick={convertToDate}
-    icon={<Clock3 size={18} />}
-  >
-    Timestamp → Date
-  </ActionButton>
-
-  <ActionButton
-    onClick={convertToTimestamp}
-    icon={<Clock3 size={18} />}
-    color="green"
-  >
-    Date → Timestamp
-  </ActionButton>
-
-  <ActionButton
-    onClick={currentTimestamp}
-    icon={<Clock3 size={18} />}
-    color="blue"
-  >
-    Current Time
-  </ActionButton>
-
-</div>
-
-<div className="mt-6 flex flex-wrap justify-center gap-4">
-
-  <ActionButton
-    onClick={copyOutput}
-    icon={<Copy size={18} />}
-    color="gray"
-  >
-    Copy
-  </ActionButton>
-
-  <ActionButton
-    onClick={clearAll}
-    icon={<Trash2 size={18} />}
-    color="red"
-  >
-    Clear
-  </ActionButton>
-
-</div>
-
-<div className="mt-12 rounded-2xl bg-slate-100 p-6 dark:bg-slate-800">
-
-  <h2 className="mb-4 text-xl font-bold dark:text-white">
-    Tentang Timestamp Converter
-  </h2>
-
-  <p className="leading-8 text-slate-600 dark:text-slate-400">
-    Timestamp Converter membantu mengubah Unix Timestamp menjadi format
-    tanggal dan waktu yang mudah dibaca, maupun sebaliknya. Tool ini
-    sangat berguna bagi programmer, backend developer, DevOps, serta
-    administrator sistem ketika melakukan debugging, logging, atau
-    pengolahan data berbasis waktu.
-  </p>
-
-</div>
-
-</main>
-
-);
+    </ToolLayout>
+  );
 }

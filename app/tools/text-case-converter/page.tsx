@@ -1,77 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Copy,
-  Download,
-  Trash2,
-  ArrowUpAZ,
-  ArrowDownAZ,
-  RefreshCw,
-  CaseSensitive,
-} from "lucide-react";
 
-import ToolHeader from "@/components/tools/ToolHeader";
+import ToolLayout from "@/components/tool/ToolLayout";
 import ToolTextarea from "@/components/tools/ToolTextarea";
-import StatusAlert from "@/components/tools/StatusAlert";
 import ActionButton from "@/components/tools/ActionButton";
+import StatusAlert from "@/components/tools/StatusAlert";
 
 export default function TextCaseConverterPage() {
-
   const [input, setInput] = useState("");
-
   const [output, setOutput] = useState("");
-
   const [status, setStatus] = useState("");
 
   function toUpperCase() {
-
     setOutput(input.toUpperCase());
-
-    setStatus("✅ Converted to UPPERCASE");
-
+    setStatus("✅ Berhasil diubah ke UPPERCASE.");
   }
 
   function toLowerCase() {
-
     setOutput(input.toLowerCase());
-
-    setStatus("✅ Converted to lowercase");
-
+    setStatus("✅ Berhasil diubah ke lowercase.");
   }
 
   function toTitleCase() {
-
-    const title = input.replace(
+    const result = input.replace(
       /\w\S*/g,
       (txt) =>
         txt.charAt(0).toUpperCase() +
         txt.substring(1).toLowerCase()
     );
 
-    setOutput(title);
-
-    setStatus("✅ Converted to Title Case");
-
+    setOutput(result);
+    setStatus("✅ Berhasil diubah ke Title Case.");
   }
 
   function toSentenceCase() {
+    if (!input.length) return;
 
-    if (!input.trim()) return;
-
-    const sentence =
+    const result =
       input.charAt(0).toUpperCase() +
       input.slice(1).toLowerCase();
 
-    setOutput(sentence);
-
-    setStatus("✅ Converted to Sentence case");
-
+    setOutput(result);
+    setStatus("✅ Berhasil diubah ke Sentence case.");
   }
 
   function toggleCase() {
-
-    const toggled = input
+    const result = input
       .split("")
       .map((char) =>
         char === char.toUpperCase()
@@ -80,177 +55,105 @@ export default function TextCaseConverterPage() {
       )
       .join("");
 
-    setOutput(toggled);
-
-    setStatus("✅ Toggle Case berhasil");
-
+    setOutput(result);
+    setStatus("✅ Berhasil Toggle Case.");
   }
 
-  async function copyOutput() {
-
+  async function copyResult() {
     if (!output) return;
 
     await navigator.clipboard.writeText(output);
 
-    setStatus("✅ Berhasil disalin");
-
+    setStatus("✅ Hasil berhasil disalin.");
   }
 
   function clearAll() {
-
     setInput("");
-
     setOutput("");
-
     setStatus("");
-
-  }
-
-  function downloadTXT() {
-
-    if (!output) return;
-
-    const blob = new Blob(
-      [output],
-      {
-        type: "text/plain",
-      }
-    );
-
-    const url =
-      URL.createObjectURL(blob);
-
-    const link =
-      document.createElement("a");
-
-    link.href = url;
-
-    link.download =
-      "text-case-result.txt";
-
-    link.click();
-
-    URL.revokeObjectURL(url);
-
   }
 
   return (
-
-    <main className="mx-auto max-w-6xl px-6 py-20">
-
-      <ToolHeader
-        icon="🔤"
-        title="Text Case Converter"
-        description="Ubah teks menjadi UPPERCASE, lowercase, Title Case, Sentence case, atau Toggle Case dengan cepat."
-      />
-
-      <div className="mt-12 grid gap-8 lg:grid-cols-2">
+    <ToolLayout
+      toolId="text-case-converter"
+      icon="🔤"
+      title="Text Case Converter"
+      description="Ubah teks menjadi berbagai format huruf."
+      category="Text"
+      badge="Popular"
+      rating="4.9"
+      users="7K+"
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
 
         <ToolTextarea
-          label="Input Text"
+          label="Input"
           value={input}
           onChange={setInput}
-          placeholder="Masukkan teks di sini..."
+          placeholder="Masukkan teks..."
         />
 
         <ToolTextarea
-          label="Result"
+          label="Output"
           value={output}
+          placeholder="Hasil..."
           readOnly
-          placeholder="Hasil konversi akan muncul di sini..."
         />
 
       </div>
 
-      <StatusAlert
-        status={status}
-      />
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+      <div className="mt-8 flex flex-wrap gap-4">
 
-        <ActionButton
-          onClick={toUpperCase}
-          icon={<ArrowUpAZ size={18} />}
-        >
+        <ActionButton onClick={toUpperCase}>
           UPPERCASE
         </ActionButton>
 
         <ActionButton
+          color="green"
           onClick={toLowerCase}
-          icon={<ArrowDownAZ size={18} />}
         >
           lowercase
         </ActionButton>
 
         <ActionButton
+          color="gray"
           onClick={toTitleCase}
-          icon={<CaseSensitive size={18} />}
         >
           Title Case
         </ActionButton>
 
         <ActionButton
+          color="blue"
           onClick={toSentenceCase}
-          icon={<RefreshCw size={18} />}
-          color="green"
         >
           Sentence Case
         </ActionButton>
 
         <ActionButton
+          color="green"
           onClick={toggleCase}
-          icon={<RefreshCw size={18} />}
-          color="gray"
         >
           Toggle Case
         </ActionButton>
 
-      </div>
-
-      <div className="mt-6 flex flex-wrap justify-center gap-4">
-
         <ActionButton
-          onClick={copyOutput}
-          icon={<Copy size={18} />}
           color="gray"
+          onClick={copyResult}
         >
           Copy
         </ActionButton>
 
         <ActionButton
-          onClick={downloadTXT}
-          icon={<Download size={18} />}
-          color="green"
-        >
-          Download
-        </ActionButton>
-
-        <ActionButton
-          onClick={clearAll}
-          icon={<Trash2 size={18} />}
           color="red"
+          onClick={clearAll}
         >
           Clear
         </ActionButton>
 
       </div>
 
-      <div className="mt-12 rounded-2xl bg-slate-100 p-6 text-center dark:bg-slate-800">
+      <StatusAlert status={status} />
 
-        <h2 className="mb-4 text-xl font-bold dark:text-white">
-          Tentang Text Case Converter
-        </h2>
-
-        <p className="leading-8 text-slate-600 dark:text-slate-400">
-          Tool ini membantu mengubah format huruf menjadi
-          UPPERCASE, lowercase, Title Case, Sentence Case,
-          maupun Toggle Case. Sangat berguna untuk penulisan
-          artikel, coding, SEO, maupun kebutuhan akademik.
-        </p>
-
-      </div>
-
-    </main>
-
+    </ToolLayout>
   );
-
 }

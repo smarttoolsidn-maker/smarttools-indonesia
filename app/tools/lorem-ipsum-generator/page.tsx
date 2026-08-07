@@ -2,109 +2,61 @@
 
 import { useState } from "react";
 
-import {
-  Copy,
-  Download,
-  Trash2,
-  RefreshCw,
-} from "lucide-react";
-
-import ToolHeader from "@/components/tools/ToolHeader";
+import ToolLayout from "@/components/tool/ToolLayout";
+import ToolSlider from "@/components/tools/ToolSlider";
 import ToolTextarea from "@/components/tools/ToolTextarea";
-import StatusAlert from "@/components/tools/StatusAlert";
 import ActionButton from "@/components/tools/ActionButton";
+import StatusAlert from "@/components/tools/StatusAlert";
 
-const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.`;
+const paragraph =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
-export default function LoremGeneratorPage() {
-
+export default function LoremIpsumGeneratorPage() {
   const [count, setCount] = useState(3);
-
-  const [output, setOutput] = useState(() =>
-    Array(3).fill(lorem).join("\n\n")
-  );
-
+  const [output, setOutput] = useState("");
   const [status, setStatus] = useState("");
 
   function generateLorem() {
+    const result = Array(count)
+      .fill(paragraph)
+      .join("\n\n");
 
-    setOutput(
-      Array(count)
-        .fill(lorem)
-        .join("\n\n")
-    );
-
-    setStatus("✅ Lorem Ipsum berhasil dibuat");
-
+    setOutput(result);
+    setStatus("✅ Lorem Ipsum berhasil dibuat.");
   }
 
-  async function copyOutput() {
+  async function copyResult() {
+    if (!output) return;
 
-    await navigator.clipboard.writeText(
-      output
-    );
+    await navigator.clipboard.writeText(output);
 
-    setStatus("✅ Berhasil disalin");
-
+    setStatus("✅ Hasil berhasil disalin.");
   }
 
   function clearAll() {
-
     setOutput("");
-
     setStatus("");
-
-  }
-
-  function downloadTXT() {
-
-    const blob = new Blob(
-      [output],
-      {
-        type: "text/plain",
-      }
-    );
-
-    const url =
-      URL.createObjectURL(blob);
-
-    const link =
-      document.createElement("a");
-
-    link.href = url;
-
-    link.download = "lorem-ipsum.txt";
-
-    link.click();
-
-    URL.revokeObjectURL(url);
-
   }
 
   return (
-      <main className="mx-auto max-w-6xl px-6 py-20">
+    <ToolLayout
+      toolId="lorem-ipsum-generator"
+      icon="📝"
+      title="Lorem Ipsum Generator"
+      description="Generate Lorem Ipsum sesuai jumlah paragraf."
+      category="Text"
+      badge="Popular"
+      rating="4.9"
+      users="4K+"
+    >
+      <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800">
 
-      <ToolHeader
-        icon="📝"
-        title="Lorem Ipsum Generator"
-        description="Buat teks Lorem Ipsum untuk kebutuhan desain, website, dan aplikasi."
-      />
-
-      <div className="mt-12">
-
-        <label className="mb-3 block font-semibold dark:text-white">
-          Jumlah Paragraph
-        </label>
-
-        <input
-          type="number"
+        <ToolSlider
+          label="Jumlah Paragraf"
+          value={count}
           min={1}
           max={20}
-          value={count}
-          onChange={(e) =>
-            setCount(Number(e.target.value))
-          }
-          className="w-40 rounded-xl border border-slate-300 bg-white p-3 outline-none focus:border-blue-500 dark:border-slate-600 dark:bg-slate-900 dark:text-white"
+          onChange={setCount}
         />
 
       </div>
@@ -112,69 +64,38 @@ export default function LoremGeneratorPage() {
       <div className="mt-8">
 
         <ToolTextarea
-          label="Lorem Ipsum"
+          label="Generated Text"
           value={output}
-          readOnly
           placeholder="Lorem Ipsum akan muncul di sini..."
+          readOnly
         />
 
       </div>
 
-      <StatusAlert
-        status={status}
-      />
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+      <div className="mt-8 flex flex-wrap gap-4">
 
-        <ActionButton
-          onClick={generateLorem}
-          icon={<RefreshCw size={18} />}
-          color="blue"
-        >
+        <ActionButton onClick={generateLorem}>
           Generate
         </ActionButton>
 
         <ActionButton
-          onClick={copyOutput}
-          icon={<Copy size={18} />}
-          color="gray"
+          color="green"
+          onClick={copyResult}
         >
           Copy
         </ActionButton>
 
         <ActionButton
-          onClick={downloadTXT}
-          icon={<Download size={18} />}
-          color="green"
-        >
-          Download
-        </ActionButton>
-
-        <ActionButton
-          onClick={clearAll}
-          icon={<Trash2 size={18} />}
           color="red"
+          onClick={clearAll}
         >
           Clear
         </ActionButton>
 
       </div>
 
-      <div className="mt-12 rounded-2xl bg-slate-100 p-6 text-center text-sm leading-7 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+      <StatusAlert status={status} />
 
-        <h2 className="mb-3 text-lg font-bold dark:text-white">
-          Tentang Lorem Ipsum
-        </h2>
-
-        <p>
-          Lorem Ipsum merupakan teks dummy yang telah digunakan sejak
-          abad ke-16 oleh industri percetakan dan desain sebagai contoh
-          isi sebelum konten asli tersedia. Tool ini membantu desainer,
-          developer, dan content creator menghasilkan placeholder text
-          secara instan.
-        </p>
-
-      </div>
-
-    </main>
+    </ToolLayout>
   );
 }

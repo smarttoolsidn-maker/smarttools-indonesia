@@ -6,6 +6,10 @@ import ToolLayout from "@/components/tool/ToolLayout";
 import PasswordOutput from "@/components/tools/PasswordOutput";
 import ActionButton from "@/components/tools/ActionButton";
 import StatusAlert from "@/components/tools/StatusAlert";
+import {
+  generatePassword,
+} from "@/lib/password";
+
 
 
 export default function PasswordGeneratorPage() {

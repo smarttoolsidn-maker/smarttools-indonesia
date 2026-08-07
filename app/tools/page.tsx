@@ -1,173 +1,151 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-import { tools } from "@/data/tools";
+import ToolLayout from "@/components/tool/ToolLayout";
+import ToolTextarea from "@/components/tools/ToolTextarea";
+import ActionButton from "@/components/tools/ActionButton";
 
-import ToolGrid from "@/components/ToolGrid";
+export default function WordCounterPage() {
+  const [text, setText] = useState("");
 
-import FeaturedTools from "@/components/FeaturedTools";
+  const stats = useMemo(() => {
+    const trimmed = text.trim();
 
+    const words = trimmed
+      ? trimmed.split(/\s+/).length
+      : 0;
 
-export default function ToolsPage() {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("Semua");
-  const filteredTools = tools.filter((tool) => {
-  const matchSearch = tool.title
-    .toLowerCase()
-    .includes(search.toLowerCase());
+    const characters = text.length;
 
-  const matchCategory =
-    category === "Semua"
-      ? true
-      : tool.category === category;
+    const charactersNoSpace = text.replace(/\s/g, "").length;
 
-  return matchSearch && matchCategory;
-});
+    const paragraphs = trimmed
+      ? trimmed.split(/\n+/).length
+      : 0;
+
+    const readingTime = Math.max(
+      1,
+      Math.ceil(words / 200)
+    );
+
+    return {
+      words,
+      characters,
+      charactersNoSpace,
+      paragraphs,
+      readingTime,
+    };
+  }, [text]);
+
+  function clearText() {
+    setText("");
+  }
+
+  async function copyText() {
+    if (!text) return;
+
+    await navigator.clipboard.writeText(text);
+  }
+
   return (
-    <main className="mx-auto max-w-7xl px-6 py-20">
+    <ToolLayout
+      toolId="word-counter"
+      icon="📊"
+      title="Word Counter"
+      description="Hitung kata, karakter, paragraf, dan estimasi waktu baca."
+      category="Text"
+      badge="Popular"
+      rating="4.9"
+      users="9K+"
+    >
+      <ToolTextarea
+        label="Input Text"
+        value={text}
+        onChange={setText}
+        placeholder="Mulai mengetik..."
+      />
 
-      <div className="text-center">
+      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
 
-        <h1 className="text-5xl font-extrabold dark:text-white">
-          🛠️ SmartTools Indonesia
-        </h1>
+        <StatCard
+          title="Words"
+          value={stats.words}
+          color="text-blue-600"
+        />
 
-        <p className="mt-5 text-lg text-slate-600 dark:text-slate-300">
-          Kumpulan tools gratis untuk Developer, Mahasiswa,
-          Content Creator, UMKM, dan semua orang.
-        </p>
+        <StatCard
+          title="Characters"
+          value={stats.characters}
+          color="text-green-600"
+        />
+
+        <StatCard
+          title="No Spaces"
+          value={stats.charactersNoSpace}
+          color="text-purple-600"
+        />
+
+        <StatCard
+          title="Paragraphs"
+          value={stats.paragraphs}
+          color="text-orange-600"
+        />
+
+        <StatCard
+          title="Reading Time"
+          value={`${stats.readingTime} min`}
+          color="text-pink-600"
+        />
 
       </div>
-      <div className="mx-auto mt-10 max-w-xl">
 
-  <input
-    type="text"
-    placeholder="🔍 Search tools..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    className="w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-lg outline-none transition focus:border-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
-  />
+      <div className="mt-8 flex flex-wrap gap-4">
 
-</div>
+        <ActionButton
+          color="green"
+          onClick={copyText}
+        >
+          Copy
+        </ActionButton>
 
-<div className="mt-10 text-center">
+        <ActionButton
+          color="red"
+          onClick={clearText}
+        >
+          Clear
+        </ActionButton>
 
-  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
+      </div>
 
-    Browse By Category
+    </ToolLayout>
+  );
+}
 
-  </p>
+interface StatCardProps {
+  title: string;
+  value: number | string;
+  color: string;
+}
 
-</div>
+function StatCard({
+  title,
+  value,
+  color,
+}: StatCardProps) {
+  return (
+    <div className="rounded-3xl border border-slate-200 bg-white p-6 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800">
 
-<div className="mt-10 flex flex-wrap justify-center gap-4">
+      <h3
+        className={`text-4xl font-extrabold ${color}`}
+      >
+        {value}
+      </h3>
 
-  {[
-  { name: "Semua", icon: "✨" },
-  { name: "Developer", icon: "💻" },
-  { name: "Generator", icon: "⚡" },
-  { name: "Converter", icon: "🔄" },
-  { name: "Text", icon: "📝" },
-  { name: "Utility", icon: "🛠️" },
-  { name: "Color", icon: "🎨" },
-].map((item) => (
+      <p className="mt-2 font-semibold dark:text-white">
+        {title}
+      </p>
 
-  <button
-    key={item.name}
-    onClick={() => setCategory(item.name)}
-    className={`group flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300
-
-      ${
-        category === item.name
-          ? "scale-105 bg-blue-600 text-white shadow-lg shadow-blue-500/30"
-          : "border border-slate-300 bg-white text-slate-700 hover:-translate-y-1 hover:border-blue-500 hover:text-blue-600 hover:shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
-      }`}
-  >
-
-    <span className="text-base">
-      {item.icon}
-    </span>
-
-    {item.name}
-
-  </button>
-
-))}
-
- 
-
-</div>
-
-<div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-
-  <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-    <h2 className="text-4xl font-extrabold text-blue-600">
-    {tools.length}+
-    </h2>
-
-    <p className="mt-2 font-semibold dark:text-white">
-      Available Tools
-    </p>
-
-    <p className="mt-1 text-sm text-slate-500">
-      Siap digunakan gratis.
-    </p>
-  </div>
-
-  <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-    <h2 className="text-4xl font-extrabold text-green-600">
-      100%
-    </h2>
-
-    <p className="mt-2 font-semibold dark:text-white">
-      Browser Based
-    </p>
-
-    <p className="mt-1 text-sm text-slate-500">
-      Tanpa instalasi.
-    </p>
-  </div>
-
-  <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-    <h2 className="text-4xl font-extrabold text-purple-600">
-      24/7
-    </h2>
-
-    <p className="mt-2 font-semibold dark:text-white">
-      Available
-    </p>
-
-    <p className="mt-1 text-sm text-slate-500">
-      Bisa diakses kapan saja.
-    </p>
-  </div>
-
-  <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-    <h2 className="text-4xl font-extrabold text-orange-600">
-      🇮🇩
-    </h2>
-
-    <p className="mt-2 font-semibold dark:text-white">
-      Made in Indonesia
-    </p>
-
-    <p className="mt-1 text-sm text-slate-500">
-      Dibuat untuk semua orang.
-    </p>
-  </div>
-
-</div>
-
-      {search === "" && category === "Semua" && (
-  <FeaturedTools />
-)}
-
-<div className="mt-16">
-  <ToolGrid tools={filteredTools} />
-</div>
-
-
-    </main>
+    </div>
   );
 }
