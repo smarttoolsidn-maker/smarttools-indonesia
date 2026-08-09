@@ -3,112 +3,117 @@
 import { useState } from "react";
 
 import ToolLayout from "@/components/tool/ToolLayout";
+
 import ToolTextarea from "@/components/tools/ToolTextarea";
 import ActionButton from "@/components/tools/ActionButton";
 import StatusAlert from "@/components/tools/StatusAlert";
 
+import {
+  encodeBase64,
+  decodeBase64,
+} from "@/lib/base64";
+
+import { useStatus } from "@/hooks";
+
 export default function Base64EncoderPage() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [status, setStatus] = useState("");
 
-  function encodeBase64() {
+  const {
+    status,
+    success,
+    error,
+  } = useStatus();
+
+  function handleEncode() {
     try {
-      const encoded = btoa(unescape(encodeURIComponent(input)));
+      const result = encodeBase64(input);
 
-      setOutput(encoded);
+      setOutput(result);
 
-      setStatus("✅ Base64 berhasil di-encode.");
+      success("Text berhasil di-encode.");
     } catch {
-      setStatus("❌ Gagal encode Base64.");
+      error("Gagal melakukan encode.");
     }
   }
 
-  function decodeBase64() {
+  function handleDecode() {
     try {
-      const decoded = decodeURIComponent(escape(atob(input)));
+      const result = decodeBase64(input);
 
-      setOutput(decoded);
+      setOutput(result);
 
-      setStatus("✅ Base64 berhasil di-decode.");
+      success("Text berhasil di-decode.");
     } catch {
-      setStatus("❌ Base64 tidak valid.");
+      error("Base64 tidak valid.");
     }
   }
 
-  async function copyResult() {
-    if (!output) return;
-
-    await navigator.clipboard.writeText(output);
-
-    setStatus("✅ Hasil berhasil disalin.");
-  }
-
-  function clearAll() {
+  function handleClear() {
     setInput("");
     setOutput("");
-    setStatus("");
   }
 
   return (
     <ToolLayout
       toolId="base64-encoder"
-      icon="🔐"
-      title="Base64 Encoder & Decoder"
-      description="Encode dan Decode Base64 secara instan."
-      category="Developer"
-      badge="Developer"
+      icon="🔤"
+      title="Base64 Encoder / Decoder"
+      description="Encode maupun decode Base64 secara instan."
+      category="Converter"
+      badge="Popular"
       rating="4.9"
-      users="6K+"
+      users="7K+"
     >
-      <div className="grid gap-6 lg:grid-cols-2">
+      <ToolTextarea
+        label="Input"
+        value={input}
+        onChange={setInput}
+        placeholder="Masukkan text atau Base64..."
+      />
 
-        <ToolTextarea
-          label="Input"
-          value={input}
-          onChange={setInput}
-          placeholder="Masukkan teks..."
-        />
+      <div className="mt-8">
 
         <ToolTextarea
           label="Output"
           value={output}
-          placeholder="Hasil..."
           readOnly
+          placeholder="Hasil akan muncul di sini..."
         />
 
       </div>
 
       <div className="mt-8 flex flex-wrap gap-4">
 
-        <ActionButton onClick={encodeBase64}>
+        <ActionButton
+          onClick={handleEncode}
+        >
           Encode
         </ActionButton>
 
         <ActionButton
+          onClick={handleDecode}
           color="green"
-          onClick={decodeBase64}
         >
           Decode
         </ActionButton>
 
         <ActionButton
+          onClick={handleClear}
           color="gray"
-          onClick={copyResult}
-        >
-          Copy
-        </ActionButton>
-
-        <ActionButton
-          color="red"
-          onClick={clearAll}
         >
           Clear
         </ActionButton>
 
       </div>
 
-      <StatusAlert status={status} />
+      <div className="mt-8">
+
+        <StatusAlert
+          status={status}
+        />
+
+      </div>
 
     </ToolLayout>
   );

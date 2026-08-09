@@ -1,14 +1,17 @@
-export function decodeJWT(
-  token: string
-) {
-  try {
-    const payload =
-      token.split(".")[1];
+export function decodeJWT(token: string) {
+  const parts = token.split(".");
 
-    return JSON.parse(
-      atob(payload)
-    );
-  } catch {
-    return null;
+  if (parts.length !== 3) {
+    throw new Error("Invalid JWT");
   }
+
+  const payload = parts[1];
+
+  const decoded = atob(payload);
+
+  return JSON.stringify(
+    JSON.parse(decoded),
+    null,
+    2
+  );
 }

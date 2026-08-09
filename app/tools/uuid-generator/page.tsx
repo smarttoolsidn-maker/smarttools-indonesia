@@ -3,68 +3,47 @@
 import { useState } from "react";
 
 import ToolLayout from "@/components/tool/ToolLayout";
+
+import ToolResult from "@/components/tools/ToolResult";
 import ActionButton from "@/components/tools/ActionButton";
 import StatusAlert from "@/components/tools/StatusAlert";
-import ToolSlider from "@/components/tools/ToolSlider";
+
+import { generateUUID } from "@/lib/uuid";
+
+import { useClipboard, useStatus } from "@/hooks";
 
 export default function UUIDGeneratorPage() {
-  const [count, setCount] = useState(5);
-  const [uuids, setUUIDs] = useState<string[]>([]);
-  const [status, setStatus] = useState("");
+  const [uuid, setUuid] = useState("");
 
-  function generateUUIDs() {
-    const generated = Array.from(
-      { length: count },
-      () => crypto.randomUUID()
-    );
+  const {
+    copied,
+    copy,
+  } = useClipboard();
 
-    setUUIDs(generated);
-    setStatus("✅ UUID berhasil dibuat.");
+  const {
+    status,
+    success,
+    error,
+  } = useStatus();
+
+  function handleGenerateUUID() {
+    try {
+      const value = generateUUID();
+
+      setUuid(value);
+
+      success("UUID berhasil dibuat.");
+    } catch {
+      error("Gagal membuat UUID.");
+    }
   }
 
-  async function copyUUID(uuid: string) {
-    await navigator.clipboard.writeText(uuid);
+  async function handleCopyUUID() {
+    const ok = await copy(uuid);
 
-    setStatus("✅ UUID berhasil disalin.");
-  }
-
-  async function copyAll() {
-    if (!uuids.length) return;
-
-    await navigator.clipboard.writeText(
-      uuids.join("\n")
-    );
-
-    setStatus("✅ Semua UUID berhasil disalin.");
-  }
-
-  function downloadTXT() {
-    if (!uuids.length) return;
-
-    const blob = new Blob(
-      [uuids.join("\n")],
-      {
-        type: "text/plain",
-      }
-    );
-
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-
-    a.href = url;
-    a.download = "uuid.txt";
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-
-    setStatus("✅ File berhasil diunduh.");
-  }
-
-  function clearAll() {
-    setUUIDs([]);
-    setStatus("🗑️ Semua UUID dihapus.");
+    if (ok) {
+      success("UUID berhasil disalin.");
+    }
   }
 
   return (
@@ -72,100 +51,39 @@ export default function UUIDGeneratorPage() {
       toolId="uuid-generator"
       icon="🆔"
       title="UUID Generator"
-      description="Generate UUID v4 secara instan dan gratis."
+      description="Generate UUID v4 secara instan dan aman."
       category="Generator"
-      badge="Developer"
+      badge="Popular"
       rating="4.9"
-      users="4K+"
+      users="6K+"
     >
-      <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800">
-
-        <h2 className="mb-6 text-xl font-bold dark:text-white">
-          UUID Settings
-        </h2>
-
-        <ToolSlider
-          label="Jumlah UUID"
-          value={count}
-          min={1}
-          max={100}
-          onChange={setCount}
-        />
-
-      </div>
-
-      <div className="mt-8 flex flex-wrap gap-4">
+      <ToolResult
+        label="Generated UUID"
+        value={uuid}
+      />
+            <div className="mt-8 flex flex-wrap gap-4">
 
         <ActionButton
-          onClick={generateUUIDs}
+          onClick={handleGenerateUUID}
         >
           Generate UUID
         </ActionButton>
 
         <ActionButton
-          color="green"
-          onClick={copyAll}
-        >
-          Copy All
-        </ActionButton>
-
-        <ActionButton
           color="gray"
-          onClick={downloadTXT}
+          onClick={handleCopyUUID}
+          disabled={!uuid}
         >
-          Download TXT
-        </ActionButton>
-
-        <ActionButton
-          color="red"
-          onClick={clearAll}
-        >
-          Clear
+          {copied ? "Copied!" : "Copy UUID"}
         </ActionButton>
 
       </div>
 
-      {uuids.length > 0 && (
-
-        <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-
-          <h2 className="mb-6 text-xl font-bold dark:text-white">
-            Generated UUID
-          </h2>
-
-          <div className="space-y-3">
-
-            {uuids.map((uuid) => (
-
-              <div
-                key={uuid}
-                className="flex items-center justify-between rounded-2xl border border-slate-200 p-4 dark:border-slate-700"
-              >
-
-                <code className="break-all text-sm dark:text-white">
-                  {uuid}
-                </code>
-
-                <ActionButton
-                  color="green"
-                  onClick={() => copyUUID(uuid)}
-                >
-                  Copy
-                </ActionButton>
-
-              </div>
-
-            ))}
-
-          </div>
-
-        </div>
-
-      )}
-
-      <StatusAlert
-        status={status}
-      />
+      <div className="mt-8">
+        <StatusAlert
+          status={status}
+        />
+      </div>
 
     </ToolLayout>
   );

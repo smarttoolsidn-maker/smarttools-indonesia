@@ -1,15 +1,13 @@
-export function hexToRgb(
-  hex: string
-) {
-  const value =
-    hex.replace("#", "");
+export function hexToRgb(hex: string): string {
+  const clean = hex.replace("#", "");
 
-  const bigint =
-    parseInt(value, 16);
+  if (clean.length !== 6) {
+    throw new Error("Invalid");
+  }
 
-  return {
-    r: (bigint >> 16) & 255,
-    g: (bigint >> 8) & 255,
-    b: bigint & 255,
-  };
+  const r = parseInt(clean.slice(0, 2), 16);
+  const g = parseInt(clean.slice(2, 4), 16);
+  const b = parseInt(clean.slice(4, 6), 16);
+
+  return `rgb(${r}, ${g}, ${b})`;
 }

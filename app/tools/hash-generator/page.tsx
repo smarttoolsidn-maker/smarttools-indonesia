@@ -1,226 +1,91 @@
 "use client";
-import * as CryptoJS from "crypto-js";
+
 import { useState } from "react";
 
-import {
-  ShieldCheck,
-  Copy,
-  Download,
-  Trash2,
-} from "lucide-react";
-
-import ToolHeader from "@/components/tools/ToolHeader";
+import ToolLayout from "@/components/tool/ToolLayout";
 import ToolTextarea from "@/components/tools/ToolTextarea";
-import StatusAlert from "@/components/tools/StatusAlert";
 import ActionButton from "@/components/tools/ActionButton";
+import StatusAlert from "@/components/tools/StatusAlert";
+
+import { sha256 } from "@/lib/hash";
+
+import { useStatus } from "@/hooks";
 
 export default function HashGeneratorPage() {
-
   const [input, setInput] = useState("");
-
   const [output, setOutput] = useState("");
 
-  const [status, setStatus] = useState("");
+  const {
+    status,
+    success,
+    error,
+  } = useStatus();
 
-  function generateHash(type: string) {
+  async function handleGenerate() {
+    if (!input.trim()) {
+      error("Masukkan teks terlebih dahulu.");
+      return;
+    }
 
-  if (!input.trim()) {
+    const result = await sha256(input);
 
-    setStatus("⚠️ Masukkan teks terlebih dahulu");
+    setOutput(result);
 
-    return;
-
+    success("Hash berhasil dibuat.");
   }
 
-  let hash = "";
-
-  switch (type) {
-
-    case "MD5":
-      hash = CryptoJS.MD5(input).toString();
-      break;
-
-    case "SHA1":
-      hash = CryptoJS.SHA1(input).toString();
-      break;
-
-    case "SHA256":
-      hash = CryptoJS.SHA256(input).toString();
-      break;
-
-    case "SHA512":
-      hash = CryptoJS.SHA512(input).toString();
-      break;
-
-    default:
-      hash = "";
-  }
-
-  setOutput(hash);
-
-  setStatus(`✅ ${type} berhasil dibuat`);
-
-}
-
-  async function copyOutput() {
-
-    if (!output) return;
-
-    await navigator.clipboard.writeText(
-      output
-    );
-
-    setStatus("✅ Berhasil disalin");
-
-  }
-
-  function clearAll() {
-
+  function handleClear() {
     setInput("");
-
     setOutput("");
-
-    setStatus("");
-
-  }
-
-  function downloadTXT() {
-
-    if (!output) return;
-
-    const blob = new Blob(
-      [output],
-      {
-        type: "text/plain",
-      }
-    );
-
-    const url =
-      URL.createObjectURL(blob);
-
-    const link =
-      document.createElement("a");
-
-    link.href = url;
-
-    link.download = "hash.txt";
-
-    link.click();
-
-    URL.revokeObjectURL(url);
-
   }
 
   return (
-
-    <main className="mx-auto max-w-6xl px-6 py-20">
-
-      <ToolHeader
-        icon="🔐"
-        title="Hash Generator"
-        description="Generate hash menggunakan SHA-1, SHA-256, SHA-512, dan MD5."
+    <ToolLayout
+      toolId="hash-generator"
+      icon="🔒"
+      title="SHA-256 Hash Generator"
+      description="Generate hash SHA-256 secara instan."
+      category="Developer"
+      badge="Popular"
+      rating="4.9"
+      users="5K+"
+    >
+      <ToolTextarea
+        label="Input"
+        value={input}
+        onChange={setInput}
+        placeholder="Masukkan teks..."
       />
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-2">
-
+      <div className="mt-8">
         <ToolTextarea
-          label="Input Text"
-          value={input}
-          onChange={setInput}
-          placeholder="Masukkan teks..."
-        />
-
-        <ToolTextarea
-          label="Hash Result"
+          label="SHA-256 Hash"
           value={output}
           readOnly
           placeholder="Hash akan muncul di sini..."
         />
-
       </div>
 
-      <StatusAlert
-        status={status}
-      />
-<div className="mt-8 flex flex-wrap justify-center gap-4">
+      <div className="mt-8 flex flex-wrap gap-4">
+        <ActionButton
+          onClick={handleGenerate}
+        >
+          Generate Hash
+        </ActionButton>
 
-  <ActionButton
-    onClick={() => generateHash("MD5")}
-    icon={<ShieldCheck size={18} />}
-  >
-    MD5
-  </ActionButton>
+        <ActionButton
+          color="gray"
+          onClick={handleClear}
+        >
+          Clear
+        </ActionButton>
+      </div>
 
-  <ActionButton
-    onClick={() => generateHash("SHA1")}
-    icon={<ShieldCheck size={18} />}
-    color="gray"
-  >
-    SHA1
-  </ActionButton>
-
-  <ActionButton
-    onClick={() => generateHash("SHA256")}
-    icon={<ShieldCheck size={18} />}
-    color="green"
-  >
-    SHA256
-  </ActionButton>
-
-  <ActionButton
-    onClick={() => generateHash("SHA512")}
-    icon={<ShieldCheck size={18} />}
-    color="blue"
-  >
-    SHA512
-  </ActionButton>
-
-</div>
-
-<div className="mt-6 flex flex-wrap justify-center gap-4">
-
-  <ActionButton
-    onClick={copyOutput}
-    icon={<Copy size={18} />}
-    color="gray"
-  >
-    Copy
-  </ActionButton>
-
-  <ActionButton
-    onClick={downloadTXT}
-    icon={<Download size={18} />}
-    color="green"
-  >
-    Download
-  </ActionButton>
-
-  <ActionButton
-    onClick={clearAll}
-    icon={<Trash2 size={18} />}
-    color="red"
-  >
-    Clear
-  </ActionButton>
-
-</div>
-
-<div className="mt-12 rounded-2xl bg-slate-100 p-6 dark:bg-slate-800">
-
-  <h2 className="mb-4 text-xl font-bold dark:text-white">
-    Tentang Hash Generator
-  </h2>
-
-  <p className="leading-8 text-slate-600 dark:text-slate-400">
-    Hash Generator digunakan untuk menghasilkan hash dari sebuah teks
-    menggunakan algoritma MD5, SHA-1, SHA-256, dan SHA-512. Tool ini
-    bermanfaat untuk pengujian aplikasi, keamanan data, verifikasi
-    integritas file, dan kebutuhan pengembangan perangkat lunak.
-  </p>
-
-</div>
-
-</main>
-
-);
+      <div className="mt-8">
+        <StatusAlert
+          status={status}
+        />
+      </div>
+    </ToolLayout>
+  );
 }

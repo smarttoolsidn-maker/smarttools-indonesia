@@ -1,21 +1,22 @@
 interface ToolCheckboxProps {
-  label: string;
   checked: boolean;
-  onChange: (checked: boolean) => void;
+  label: string;
+  onChange: () => void;
 }
 
 export default function ToolCheckbox({
-  label,
   checked,
+  label,
   onChange,
 }: ToolCheckboxProps) {
   return (
-    <label className="flex items-center gap-3 rounded-xl border border-slate-200 p-3 transition hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">
+    <label className="flex items-center gap-3">
 
       <input
         type="checkbox"
         checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
+        onChange={onChange}
+        className="h-4 w-4 accent-blue-600"
       />
 
       <span className="dark:text-white">

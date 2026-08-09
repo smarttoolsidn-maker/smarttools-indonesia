@@ -3,99 +3,88 @@
 import { useState } from "react";
 
 import ToolLayout from "@/components/tool/ToolLayout";
+
 import ToolSlider from "@/components/tools/ToolSlider";
 import ToolTextarea from "@/components/tools/ToolTextarea";
 import ActionButton from "@/components/tools/ActionButton";
 import StatusAlert from "@/components/tools/StatusAlert";
 
-const paragraph =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+import { generateLorem } from "@/lib/lorem";
 
-export default function LoremIpsumGeneratorPage() {
-  const [count, setCount] = useState(3);
+import { useStatus } from "@/hooks";
+
+export default function LoremIpsumPage() {
+  const [words, setWords] = useState(50);
+
   const [output, setOutput] = useState("");
-  const [status, setStatus] = useState("");
 
-  function generateLorem() {
-    const result = Array(count)
-      .fill(paragraph)
-      .join("\n\n");
+  const {
+    status,
+    success,
+  } = useStatus();
 
-    setOutput(result);
-    setStatus("✅ Lorem Ipsum berhasil dibuat.");
+  function handleGenerate() {
+    setOutput(
+      generateLorem(words)
+    );
+
+    success(
+      "Lorem Ipsum berhasil dibuat."
+    );
   }
 
-  async function copyResult() {
-    if (!output) return;
-
-    await navigator.clipboard.writeText(output);
-
-    setStatus("✅ Hasil berhasil disalin.");
-  }
-
-  function clearAll() {
+  function handleClear() {
     setOutput("");
-    setStatus("");
   }
 
   return (
     <ToolLayout
-      toolId="lorem-ipsum-generator"
-      icon="📝"
+      toolId="lorem-ipsum"
+      icon="📄"
       title="Lorem Ipsum Generator"
-      description="Generate Lorem Ipsum sesuai jumlah paragraf."
-      category="Text"
+      description="Generate Lorem Ipsum dengan jumlah kata yang dapat diatur."
+      category="Generator"
       badge="Popular"
       rating="4.9"
-      users="4K+"
+      users="6K+"
     >
-      <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800">
-
-        <ToolSlider
-          label="Jumlah Paragraf"
-          value={count}
-          min={1}
-          max={20}
-          onChange={setCount}
-        />
-
-      </div>
+      <ToolSlider
+        label="Jumlah Kata"
+        value={words}
+        min={10}
+        max={500}
+        onChange={setWords}
+      />
 
       <div className="mt-8">
-
         <ToolTextarea
           label="Generated Text"
           value={output}
-          placeholder="Lorem Ipsum akan muncul di sini..."
           readOnly
+          placeholder="Lorem Ipsum akan muncul di sini..."
         />
-
       </div>
 
       <div className="mt-8 flex flex-wrap gap-4">
-
-        <ActionButton onClick={generateLorem}>
+        <ActionButton
+          onClick={handleGenerate}
+        >
           Generate
         </ActionButton>
 
         <ActionButton
-          color="green"
-          onClick={copyResult}
-        >
-          Copy
-        </ActionButton>
-
-        <ActionButton
-          color="red"
-          onClick={clearAll}
+          color="gray"
+          onClick={handleClear}
         >
           Clear
         </ActionButton>
-
       </div>
 
-      <StatusAlert status={status} />
-
+      <div className="mt-8">
+        <StatusAlert
+          status={status}
+        />
+      </div>
     </ToolLayout>
   );
 }

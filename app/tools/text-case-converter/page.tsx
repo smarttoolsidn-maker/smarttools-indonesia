@@ -7,153 +7,134 @@ import ToolTextarea from "@/components/tools/ToolTextarea";
 import ActionButton from "@/components/tools/ActionButton";
 import StatusAlert from "@/components/tools/StatusAlert";
 
+import {
+  toUpperCase,
+  toLowerCase,
+  toTitleCase,
+  toSentenceCase,
+} from "@/lib/textcase";
+
+import { useStatus } from "@/hooks";
+
 export default function TextCaseConverterPage() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [status, setStatus] = useState("");
 
-  function toUpperCase() {
-    setOutput(input.toUpperCase());
-    setStatus("✅ Berhasil diubah ke UPPERCASE.");
+  const {
+    status,
+    success,
+    error,
+  } = useStatus();
+
+  function handleUpperCase() {
+    if (!input.trim()) {
+      error("Masukkan teks terlebih dahulu.");
+      return;
+    }
+
+    setOutput(toUpperCase(input));
+    success("Berhasil diubah ke UPPERCASE.");
   }
 
-  function toLowerCase() {
-    setOutput(input.toLowerCase());
-    setStatus("✅ Berhasil diubah ke lowercase.");
+  function handleLowerCase() {
+    if (!input.trim()) {
+      error("Masukkan teks terlebih dahulu.");
+      return;
+    }
+
+    setOutput(toLowerCase(input));
+    success("Berhasil diubah ke lowercase.");
   }
 
-  function toTitleCase() {
-    const result = input.replace(
-      /\w\S*/g,
-      (txt) =>
-        txt.charAt(0).toUpperCase() +
-        txt.substring(1).toLowerCase()
-    );
+  function handleTitleCase() {
+    if (!input.trim()) {
+      error("Masukkan teks terlebih dahulu.");
+      return;
+    }
 
-    setOutput(result);
-    setStatus("✅ Berhasil diubah ke Title Case.");
+    setOutput(toTitleCase(input));
+    success("Berhasil diubah ke Title Case.");
   }
 
-  function toSentenceCase() {
-    if (!input.length) return;
+  function handleSentenceCase() {
+    if (!input.trim()) {
+      error("Masukkan teks terlebih dahulu.");
+      return;
+    }
 
-    const result =
-      input.charAt(0).toUpperCase() +
-      input.slice(1).toLowerCase();
-
-    setOutput(result);
-    setStatus("✅ Berhasil diubah ke Sentence case.");
+    setOutput(toSentenceCase(input));
+    success("Berhasil diubah ke Sentence case.");
   }
 
-  function toggleCase() {
-    const result = input
-      .split("")
-      .map((char) =>
-        char === char.toUpperCase()
-          ? char.toLowerCase()
-          : char.toUpperCase()
-      )
-      .join("");
-
-    setOutput(result);
-    setStatus("✅ Berhasil Toggle Case.");
-  }
-
-  async function copyResult() {
-    if (!output) return;
-
-    await navigator.clipboard.writeText(output);
-
-    setStatus("✅ Hasil berhasil disalin.");
-  }
-
-  function clearAll() {
+  function handleClear() {
     setInput("");
     setOutput("");
-    setStatus("");
   }
 
   return (
     <ToolLayout
       toolId="text-case-converter"
-      icon="🔤"
+      icon="🔠"
       title="Text Case Converter"
-      description="Ubah teks menjadi berbagai format huruf."
-      category="Text"
+      description="Ubah teks menjadi UPPERCASE, lowercase, Title Case, atau Sentence case."
+      category="Converter"
       badge="Popular"
       rating="4.9"
-      users="7K+"
+      users="8K+"
     >
-      <div className="grid gap-6 lg:grid-cols-2">
+      <ToolTextarea
+        label="Input"
+        value={input}
+        onChange={setInput}
+        placeholder="Masukkan teks..."
+      />
 
-        <ToolTextarea
-          label="Input"
-          value={input}
-          onChange={setInput}
-          placeholder="Masukkan teks..."
-        />
-
+      <div className="mt-8">
         <ToolTextarea
           label="Output"
           value={output}
-          placeholder="Hasil..."
           readOnly
+          placeholder="Hasil akan muncul di sini..."
         />
-
       </div>
 
       <div className="mt-8 flex flex-wrap gap-4">
-
-        <ActionButton onClick={toUpperCase}>
+        <ActionButton onClick={handleUpperCase}>
           UPPERCASE
         </ActionButton>
 
         <ActionButton
+          onClick={handleLowerCase}
           color="green"
-          onClick={toLowerCase}
         >
           lowercase
         </ActionButton>
 
         <ActionButton
+          onClick={handleTitleCase}
           color="gray"
-          onClick={toTitleCase}
         >
           Title Case
         </ActionButton>
 
         <ActionButton
+          onClick={handleSentenceCase}
           color="blue"
-          onClick={toSentenceCase}
         >
-          Sentence Case
+          Sentence case
         </ActionButton>
 
         <ActionButton
-          color="green"
-          onClick={toggleCase}
-        >
-          Toggle Case
-        </ActionButton>
-
-        <ActionButton
-          color="gray"
-          onClick={copyResult}
-        >
-          Copy
-        </ActionButton>
-
-        <ActionButton
+          onClick={handleClear}
           color="red"
-          onClick={clearAll}
         >
           Clear
         </ActionButton>
-
       </div>
 
-      <StatusAlert status={status} />
-
+      <div className="mt-8">
+        <StatusAlert status={status} />
+      </div>
     </ToolLayout>
   );
 }

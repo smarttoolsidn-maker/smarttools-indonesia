@@ -1,22 +1,20 @@
-export async function sha256(
-  text: string
-) {
-  const data =
-    new TextEncoder().encode(text);
+export async function sha256(text: string): Promise<string> {
+  const encoder = new TextEncoder();
 
-  const hash =
-    await crypto.subtle.digest(
-      "SHA-256",
-      data
-    );
+  const data = encoder.encode(text);
 
-  return Array.from(
-    new Uint8Array(hash)
-  )
+  const hashBuffer = await crypto.subtle.digest(
+    "SHA-256",
+    data
+  );
+
+  const hashArray = Array.from(
+    new Uint8Array(hashBuffer)
+  );
+
+  return hashArray
     .map((b) =>
-      b
-        .toString(16)
-        .padStart(2, "0")
+      b.toString(16).padStart(2, "0")
     )
     .join("");
 }

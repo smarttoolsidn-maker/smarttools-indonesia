@@ -7,103 +7,96 @@ import ToolTextarea from "@/components/tools/ToolTextarea";
 import ActionButton from "@/components/tools/ActionButton";
 import StatusAlert from "@/components/tools/StatusAlert";
 
+import {
+  encodeURL,
+  decodeURL,
+} from "@/lib/url";
+
+import { useStatus } from "@/hooks";
+
 export default function URLEncoderPage() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [status, setStatus] = useState("");
 
-  function encodeURL() {
+  const {
+    status,
+    success,
+    error,
+  } = useStatus();
+
+  function handleEncode() {
     try {
-      setOutput(encodeURIComponent(input));
-      setStatus("✅ URL berhasil di-encode.");
+      setOutput(encodeURL(input));
+      success("URL berhasil di-encode.");
     } catch {
-      setStatus("❌ Gagal encode URL.");
+      error("Gagal encode URL.");
     }
   }
 
-  function decodeURL() {
+  function handleDecode() {
     try {
-      setOutput(decodeURIComponent(input));
-      setStatus("✅ URL berhasil di-decode.");
+      setOutput(decodeURL(input));
+      success("URL berhasil di-decode.");
     } catch {
-      setStatus("❌ URL tidak valid.");
+      error("URL tidak valid.");
     }
   }
 
-  async function copyResult() {
-    if (!output) return;
-
-    await navigator.clipboard.writeText(output);
-
-    setStatus("✅ Hasil berhasil disalin.");
-  }
-
-  function clearAll() {
+  function handleClear() {
     setInput("");
     setOutput("");
-    setStatus("");
   }
 
   return (
     <ToolLayout
       toolId="url-encoder"
-      icon="🌐"
-      title="URL Encoder & Decoder"
-      description="Encode dan Decode URL secara instan."
-      category="Developer"
-      badge="Developer"
+      icon="🔗"
+      title="URL Encoder / Decoder"
+      description="Encode atau decode URL secara instan."
+      category="Converter"
+      badge="Popular"
       rating="4.9"
-      users="5K+"
+      users="4K+"
     >
-      <div className="grid gap-6 lg:grid-cols-2">
+      <ToolTextarea
+        label="Input"
+        value={input}
+        onChange={setInput}
+        placeholder="Masukkan URL..."
+      />
 
-        <ToolTextarea
-          label="Input"
-          value={input}
-          onChange={setInput}
-          placeholder="Masukkan URL..."
-        />
-
+      <div className="mt-8">
         <ToolTextarea
           label="Output"
           value={output}
-          placeholder="Hasil..."
           readOnly
+          placeholder="Hasil akan muncul di sini..."
         />
-
       </div>
 
       <div className="mt-8 flex flex-wrap gap-4">
-
-        <ActionButton onClick={encodeURL}>
+        <ActionButton onClick={handleEncode}>
           Encode
         </ActionButton>
 
         <ActionButton
           color="green"
-          onClick={decodeURL}
+          onClick={handleDecode}
         >
           Decode
         </ActionButton>
 
         <ActionButton
           color="gray"
-          onClick={copyResult}
-        >
-          Copy
-        </ActionButton>
-
-        <ActionButton
-          color="red"
-          onClick={clearAll}
+          onClick={handleClear}
         >
           Clear
         </ActionButton>
-
       </div>
 
-      <StatusAlert status={status} />
-
+      <div className="mt-8">
+        <StatusAlert status={status} />
+      </div>
     </ToolLayout>
   );
 }

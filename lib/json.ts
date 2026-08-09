@@ -1,6 +1,4 @@
-export function formatJSON(
-  text: string
-) {
+export function formatJSON(text: string): string {
   return JSON.stringify(
     JSON.parse(text),
     null,
@@ -8,20 +6,15 @@ export function formatJSON(
   );
 }
 
-export function minifyJSON(
-  text: string
-) {
+export function minifyJSON(text: string): string {
   return JSON.stringify(
     JSON.parse(text)
   );
 }
 
-export function validateJSON(
-  text: string
-) {
+export function isValidJSON(text: string): boolean {
   try {
     JSON.parse(text);
-
     return true;
   } catch {
     return false;
