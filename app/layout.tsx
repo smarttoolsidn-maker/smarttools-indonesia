@@ -14,9 +14,72 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SmartTools Indonesia",
+  metadataBase: new URL("https://smarttools.id"),
+
+  title: {
+    default: "SmartTools Indonesia",
+    template: "%s | SmartTools Indonesia",
+  },
+
   description:
-    "Platform tools digital gratis untuk membantu pekerjaan lebih cepat dan mudah.",
+    "SmartTools Indonesia adalah kumpulan tools online gratis untuk developer, mahasiswa, pekerja, dan kebutuhan sehari-hari. Cepat, aman, dan tanpa instalasi.",
+
+  keywords: [
+    "smarttools indonesia",
+    "online tools",
+    "password generator",
+    "uuid generator",
+    "json formatter",
+    "json validator",
+    "timestamp converter",
+    "base64 encoder",
+    "word counter",
+    "text case converter",
+    "hash generator",
+    "qr generator",
+    "developer tools",
+    "tools online gratis",
+  ],
+
+  authors: [
+    {
+      name: "Muhammad Iqbal",
+    },
+  ],
+
+  creator: "Muhammad Iqbal",
+
+  publisher: "SmartTools Indonesia",
+
+  applicationName: "SmartTools Indonesia",
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  openGraph: {
+    title: "SmartTools Indonesia",
+    description:
+      "Kumpulan tools online gratis untuk developer dan kebutuhan sehari-hari.",
+
+    url: "https://smarttools.id",
+
+    siteName: "SmartTools Indonesia",
+
+    locale: "id_ID",
+
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "SmartTools Indonesia",
+
+    description:
+      "Tools online gratis untuk developer, mahasiswa, dan pekerjaan sehari-hari.",
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +89,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+  lang="id"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
