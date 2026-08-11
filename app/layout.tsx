@@ -59,27 +59,31 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "SmartTools Indonesia",
-    description:
-      "Kumpulan tools online gratis untuk developer dan kebutuhan sehari-hari.",
+  title: "SmartTools Indonesia",
+  description:
+    "Kumpulan tools online gratis untuk developer, mahasiswa, pekerja, dan kebutuhan sehari-hari.",
+  url: "https://smarttools.id",
+  siteName: "SmartTools Indonesia",
+  locale: "id_ID",
+  type: "website",
 
-    url: "https://smarttools.id",
-
-    siteName: "SmartTools Indonesia",
-
-    locale: "id_ID",
-
-    type: "website",
-  },
+  images: [
+    {
+      url: "/og-image.png",
+      width: 1200,
+      height: 630,
+      alt: "SmartTools Indonesia - Free Online Tools",
+    },
+  ],
+},
 
   twitter: {
-    card: "summary_large_image",
-
-    title: "SmartTools Indonesia",
-
-    description:
-      "Tools online gratis untuk developer, mahasiswa, dan pekerjaan sehari-hari.",
-  },
+  card: "summary_large_image",
+  title: "SmartTools Indonesia",
+  description:
+    "Tools online gratis untuk developer, mahasiswa, dan pekerjaan sehari-hari.",
+  images: ["/og-image.png"],
+},
 };
 
 export default function RootLayout({
