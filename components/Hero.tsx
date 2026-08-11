@@ -31,35 +31,49 @@ export default function Hero() {
         style={{backgroundImage:`linear-gradient(to right,#64748b 1px,transparent 1px),linear-gradient(to bottom,#64748b 1px,transparent 1px)`,backgroundSize:"40px 40px"}} />
 
       <motion.div initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{duration:.8}}
-        className="relative mx-auto grid min-h-[90vh] max-w-7xl items-center gap-20 px-6 py-20 lg:grid-cols-2">
+        className="relative mx-auto grid min-h-[90vh] max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-20">
 
         <div className="text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-medium text-blue-700 shadow-sm dark:border-blue-800 dark:bg-slate-800 dark:text-blue-300">
-            <Sparkles size={16}/> Platform Tools Digital Buatan Indonesia 🇮🇩
-          </div>
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-blue-200 bg-white px-3 py-2 text-center text-xs font-medium text-blue-700 shadow-sm sm:px-4 sm:text-sm dark:border-blue-800 dark:bg-slate-800 dark:text-blue-300">
+  <Sparkles size={16} className="shrink-0" />
+  <span>Platform Tools Digital Buatan Indonesia 🇮🇩</span>
+</div>
 
-          <h1 className="mt-8 text-5xl font-extrabold leading-tight md:text-7xl">
+          <h1 className="mt-8 text-4xl font-extrabold leading-tight sm:text-5xl md:text-7xl">
             Bekerja Lebih Cepat.<br/>
             <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent">Berpikir Lebih Cerdas.</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
+          <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 dark:text-slate-300">
             SmartTools Indonesia menyediakan berbagai tools online gratis untuk developer, mahasiswa, UMKM dan content creator.
           </p>
 
-          <div className="mt-10 flex max-w-2xl items-center rounded-2xl border border-slate-200 bg-white p-2 shadow-lg dark:border-slate-700 dark:bg-slate-800">
-            <Search className="ml-3 h-5 w-5 text-slate-400"/>
-            <input className="flex-1 bg-transparent px-4 py-3 outline-none" placeholder="Cari tools..."/>
-            <button className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">Cari</button>
-          </div>
+          <div className="mt-10 flex w-full max-w-2xl items-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-lg dark:border-slate-700 dark:bg-slate-800">
+  <Search className="ml-2 h-5 w-5 shrink-0 text-slate-400 sm:ml-3" />
 
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <Link href="/tools" className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white hover:bg-blue-700">
-              Mulai Sekarang <ArrowRight size={18}/>
-            </Link>
-                <Link href="/tools" className="rounded-xl border border-slate-300 px-7 py-4 font-semibold hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800">
-              Lihat Semua Tools
-            </Link>
+  <input
+    className="min-w-0 flex-1 bg-transparent px-3 py-3 outline-none sm:px-4"
+    placeholder="Cari tools..."
+  />
+
+  <button className="shrink-0 rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 sm:px-6">
+    Cari
+  </button>
+</div>
+
+          <div className="mt-8 flex w-full flex-col gap-4 sm:flex-row">
+            <Link
+  href="/tools"
+  className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white hover:bg-blue-700 sm:w-auto"
+>
+  Mulai Sekarang <ArrowRight size={18}/>
+</Link>
+                <Link
+  href="/tools"
+  className="w-full rounded-xl border border-slate-300 px-7 py-4 text-center font-semibold hover:bg-slate-100 sm:w-auto dark:border-slate-700 dark:hover:bg-slate-800"
+>
+  Lihat Semua Tools
+</Link>
           </div>
         </div>
 
