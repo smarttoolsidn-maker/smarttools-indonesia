@@ -1,151 +1,93 @@
-"use client";
+import Link from "next/link";
+import { tools } from "@/data/tools";
 
-import { useMemo, useState } from "react";
-
-import ToolLayout from "@/components/tool/ToolLayout";
-import ToolTextarea from "@/components/tools/ToolTextarea";
-import ActionButton from "@/components/tools/ActionButton";
-
-export default function WordCounterPage() {
-  const [text, setText] = useState("");
-
-  const stats = useMemo(() => {
-    const trimmed = text.trim();
-
-    const words = trimmed
-      ? trimmed.split(/\s+/).length
-      : 0;
-
-    const characters = text.length;
-
-    const charactersNoSpace = text.replace(/\s/g, "").length;
-
-    const paragraphs = trimmed
-      ? trimmed.split(/\n+/).length
-      : 0;
-
-    const readingTime = Math.max(
-      1,
-      Math.ceil(words / 200)
-    );
-
-    return {
-      words,
-      characters,
-      charactersNoSpace,
-      paragraphs,
-      readingTime,
-    };
-  }, [text]);
-
-  function clearText() {
-    setText("");
-  }
-
-  async function copyText() {
-    if (!text) return;
-
-    await navigator.clipboard.writeText(text);
-  }
-
+export default function ToolsPage() {
   return (
-    <ToolLayout
-      toolId="word-counter"
-      icon="📊"
-      title="Word Counter"
-      description="Hitung kata, karakter, paragraf, dan estimasi waktu baca."
-      category="Text"
-      badge="Popular"
-      rating="4.9"
-      users="9K+"
-    >
-      <ToolTextarea
-        label="Input Text"
-        value={text}
-        onChange={setText}
-        placeholder="Mulai mengetik..."
-      />
+    <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      {/* Hero */}
+      <section className="border-b border-slate-200 bg-white py-16 dark:border-slate-800 dark:bg-slate-900">
+        <div className="mx-auto max-w-7xl px-6 text-center">
 
-        <StatCard
-          title="Words"
-          value={stats.words}
-          color="text-blue-600"
-        />
+          <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+            Explore All Tools
+          </h1>
 
-        <StatCard
-          title="Characters"
-          value={stats.characters}
-          color="text-green-600"
-        />
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
+            Kumpulan tools digital gratis untuk membantu pekerjaan,
+            belajar, development, dan kebutuhan sehari-hari.
+          </p>
 
-        <StatCard
-          title="No Spaces"
-          value={stats.charactersNoSpace}
-          color="text-purple-600"
-        />
+        </div>
+      </section>
 
-        <StatCard
-          title="Paragraphs"
-          value={stats.paragraphs}
-          color="text-orange-600"
-        />
+      {/* Tools */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-6">
 
-        <StatCard
-          title="Reading Time"
-          value={`${stats.readingTime} min`}
-          color="text-pink-600"
-        />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-      </div>
+            {tools.map((tool) => (
+              <Link
+                key={tool.id}
+                href={tool.href}
+                className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:hover:border-blue-500"
+              >
 
-      <div className="mt-8 flex flex-wrap gap-4">
+                {/* Icon */}
+                <div className="text-4xl transition-transform duration-300 group-hover:scale-110">
+                  {tool.icon}
+                </div>
 
-        <ActionButton
-          color="green"
-          onClick={copyText}
-        >
-          Copy
-        </ActionButton>
+                {/* Badge */}
+                {tool.badge && (
+                  <span
+                    className={`mt-5 inline-block rounded-full px-3 py-1 text-xs font-semibold text-white ${tool.badgeColor ?? "bg-blue-500"}`}
+                  >
+                    {tool.badge}
+                  </span>
+                )}
 
-        <ActionButton
-          color="red"
-          onClick={clearText}
-        >
-          Clear
-        </ActionButton>
+                {/* Title */}
+                <h2 className="mt-4 text-xl font-bold text-slate-900 dark:text-white">
+                  {tool.title}
+                </h2>
 
-      </div>
+                {/* Description */}
+                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  {tool.description}
+                </p>
 
-    </ToolLayout>
-  );
-}
+                {/* Meta */}
+                <div className="mt-5 flex items-center justify-between text-sm">
 
-interface StatCardProps {
-  title: string;
-  value: number | string;
-  color: string;
-}
+                  {tool.users && (
+                    <span className="text-slate-500 dark:text-slate-400">
+                      👥 {tool.users}
+                    </span>
+                  )}
 
-function StatCard({
-  title,
-  value,
-  color,
-}: StatCardProps) {
-  return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-6 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800">
+                  {tool.rating && (
+                    <span className="font-semibold text-yellow-500">
+                      ⭐ {tool.rating}
+                    </span>
+                  )}
 
-      <h3
-        className={`text-4xl font-extrabold ${color}`}
-      >
-        {value}
-      </h3>
+                </div>
 
-      <p className="mt-2 font-semibold dark:text-white">
-        {title}
-      </p>
+                {/* CTA */}
+                <div className="mt-5 font-semibold text-blue-600 transition-transform duration-300 group-hover:translate-x-1 dark:text-blue-400">
+                  Gunakan Tool →
+                </div>
 
-    </div>
+              </Link>
+            ))}
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
   );
 }
