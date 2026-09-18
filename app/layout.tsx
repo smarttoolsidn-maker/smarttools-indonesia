@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -17,28 +18,33 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://smarttools.id"),
 
   title: {
-    default: "SmartTools Indonesia",
+    default: "SmartTools Indonesia | Tools Online Gratis",
     template: "%s | SmartTools Indonesia",
   },
 
   description:
-    "SmartTools Indonesia adalah kumpulan tools online gratis untuk developer, mahasiswa, pekerja, dan kebutuhan sehari-hari. Cepat, aman, dan tanpa instalasi.",
+    "Gunakan tools online gratis dari SmartTools Indonesia: penghitung kata, generator password, QR Code, formatter JSON, dan berbagai alat praktis untuk kebutuhan sehari-hari.",
 
   keywords: [
     "smarttools indonesia",
+    "tools online gratis",
     "online tools",
     "password generator",
-    "uuid generator",
+    "qr code generator",
+    "word counter",
     "json formatter",
     "json validator",
-    "timestamp converter",
+    "uuid generator",
     "base64 encoder",
-    "word counter",
+    "url encoder",
+    "lorem ipsum generator",
     "text case converter",
     "hash generator",
-    "qr generator",
+    "timestamp converter",
+    "color converter",
+    "jwt decoder",
+    "markdown preview",
     "developer tools",
-    "tools online gratis",
   ],
 
   authors: [
@@ -48,9 +54,7 @@ export const metadata: Metadata = {
   ],
 
   creator: "Muhammad Iqbal",
-
   publisher: "SmartTools Indonesia",
-
   applicationName: "SmartTools Indonesia",
 
   robots: {
@@ -58,32 +62,35 @@ export const metadata: Metadata = {
     follow: true,
   },
 
-  openGraph: {
-  title: "SmartTools Indonesia",
-  description:
-    "Kumpulan tools online gratis untuk developer, mahasiswa, pekerja, dan kebutuhan sehari-hari.",
-  url: "https://smarttools.id",
-  siteName: "SmartTools Indonesia",
-  locale: "id_ID",
-  type: "website",
+  alternates: {
+    canonical: "/",
+  },
 
-  images: [
-    {
-      url: "/og-image.png",
-      width: 1200,
-      height: 630,
-      alt: "SmartTools Indonesia - Free Online Tools",
-    },
-  ],
-},
+  openGraph: {
+    title: "SmartTools Indonesia | Tools Online Gratis",
+    description:
+      "Berbagai tools online gratis untuk developer, mahasiswa, pekerja, dan kebutuhan sehari-hari. Praktis dan mudah digunakan.",
+    url: "https://smarttools.id",
+    siteName: "SmartTools Indonesia",
+    locale: "id_ID",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SmartTools Indonesia - Tools Online Gratis",
+      },
+    ],
+  },
 
   twitter: {
-  card: "summary_large_image",
-  title: "SmartTools Indonesia",
-  description:
-    "Tools online gratis untuk developer, mahasiswa, dan pekerjaan sehari-hari.",
-  images: ["/og-image.png"],
-},
+    card: "summary_large_image",
+    title: "SmartTools Indonesia | Tools Online Gratis",
+    description:
+      "Tools online gratis untuk developer, mahasiswa, pekerja, dan kebutuhan sehari-hari.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -92,12 +99,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-  lang="id"
-      suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang="id" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <ThemeProvider>
           {children}
         </ThemeProvider>
