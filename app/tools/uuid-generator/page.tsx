@@ -79,6 +79,26 @@ export default function UUIDGeneratorPage() {
 
       </div>
 
+      <div className="mt-8 rounded-3xl border border-blue-100 bg-gradient-to-r from-blue-50 to-cyan-50 p-6 dark:border-blue-900/40 dark:from-blue-950/30 dark:to-cyan-950/20">
+  <div className="flex items-start gap-4">
+    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-xl text-white shadow-lg">
+      🆔
+    </div>
+
+    <div>
+      <h3 className="font-bold text-slate-900 dark:text-white">
+        Apa itu UUID?
+      </h3>
+
+      <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        UUID (Universally Unique Identifier) adalah identifier unik
+        yang dapat digunakan untuk database, aplikasi, API, dan
+        berbagai kebutuhan development.
+      </p>
+    </div>
+  </div>
+</div>
+
       <div className="mt-8">
         <StatusAlert
           status={status}

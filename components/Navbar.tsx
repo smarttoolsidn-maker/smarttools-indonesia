@@ -51,13 +51,13 @@ const navigation = [
   return (
     <>
     <nav className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/80 backdrop-blur-2xl transition-all duration-300 dark:border-slate-800 dark:bg-slate-950/80">
-      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto flex h-24 w-full max-w-7xl items-center justify-between gap-3 overflow-hidden px-4 sm:px-6">
 
         {/* Logo */}
         <Link
-          href="/"
-          className="group flex items-center gap-3"
-        >
+  href="/"
+  className="group flex min-w-0 shrink items-center gap-3"
+>
           <div
           className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-xl text-white shadow-lg transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 group-hover:shadow-blue-500/40"
           >
@@ -66,7 +66,7 @@ const navigation = [
 
           <div>
 
-           <h1 className="text-xl font-extrabold tracking-tight text-slate-900 transition group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+           <h1 className="truncate text-lg font-extrabold tracking-tight text-slate-900 transition group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 sm:text-xl">
 
               SmartTools Indonesia
 
@@ -93,7 +93,7 @@ const navigation = [
 </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
 
   {/* Search */}
 
@@ -105,7 +105,14 @@ const navigation = [
 
 <button
 
-onClick={() => setMobileOpen(!mobileOpen)}
+onClick={() => {
+  console.log("HAMBURGER DIKLIK");
+  setMobileOpen((prev) => {
+    console.log("mobileOpen sebelumnya:", prev);
+    console.log("mobileOpen berikutnya:", !prev);
+    return !prev;
+  });
+}}
 
 className="rounded-xl p-2 md:hidden"
 
@@ -140,12 +147,14 @@ className="rounded-xl p-2 md:hidden"
 
   {/* CTA */}
 
-  <Link
-    href="/tools"
-    className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-2.5 font-semibold text-white shadow-lg transition duration-300 hover:scale-105 hover:shadow-blue-500/30"
-  >
-    🚀 Explore Tools
-  </Link>
+  {/* CTA */}
+
+<Link
+  href="/tools"
+  className="hidden rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-2.5 font-semibold text-white shadow-lg transition duration-300 hover:scale-105 hover:shadow-blue-500/30 lg:block"
+>
+  🚀 Explore Tools
+</Link>
 
 </div>
 

@@ -9,14 +9,27 @@ export default function ToolsPage() {
       <section className="border-b border-slate-200 bg-white py-16 dark:border-slate-800 dark:bg-slate-900">
         <div className="mx-auto max-w-7xl px-6 text-center">
 
-          <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
-            Explore All Tools
-          </h1>
+          <div className="mb-8 text-left">
+  <Link
+    href="/"
+    className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-blue-500 dark:hover:text-blue-400"
+  >
+    ← Kembali ke Home
+  </Link>
+</div>
 
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
-            Kumpulan tools digital gratis untuk membantu pekerjaan,
-            belajar, development, dan kebutuhan sehari-hari.
-          </p>
+          <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+  Semua Tools untuk Membuatmu
+  <span className="block bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent">
+    Bekerja Lebih Cepat
+  </span>
+</h1>
+
+<p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg sm:leading-8">
+  Temukan berbagai tools digital gratis dalam satu tempat.
+  Praktis, cepat, dan siap membantu pekerjaan, belajar,
+  development, maupun kebutuhan sehari-hari.
+</p>
 
         </div>
       </section>
