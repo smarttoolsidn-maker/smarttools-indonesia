@@ -1,20 +1,29 @@
+
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
-import { tools } from "@/data/tools";
-import { createToolMetadata } from "@/lib/seo";
-
-const tool = tools.find(
-  (item) => item.id === "word-counter"
-);
-
-export const metadata: Metadata = tool
-  ? createToolMetadata(tool)
-  : {};
+export const metadata: Metadata = {
+  title: "Word Counter Online Gratis",
+  description:
+    "Hitung jumlah kata, karakter, karakter tanpa spasi, baris, dan estimasi waktu baca secara real-time. Gunakan Word Counter online gratis dari SmartTools Indonesia.",
+  alternates: {
+    canonical: "/tools/word-counter",
+  },
+  openGraph: {
+    title: "Word Counter Online Gratis | SmartTools Indonesia",
+    description:
+      "Hitung kata, karakter, baris, dan estimasi waktu baca secara instan dengan Word Counter SmartTools Indonesia.",
+    url: "https://smarttools.id/tools/word-counter",
+    siteName: "SmartTools Indonesia",
+    locale: "id_ID",
+    type: "website",
+  },
+};
 
 export default function WordCounterLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
+}: Readonly<{
+  children: ReactNode;
+}>) {
+  return <>{children}</>;
 }
