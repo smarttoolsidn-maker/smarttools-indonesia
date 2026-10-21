@@ -1,46 +1,69 @@
 import type { MetadataRoute } from "next";
 
 import { tools } from "@/data/tools";
+import { blogArticles } from "@/data/blog";
+
+const baseUrl = "https://smarttools.id";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://smarttools.id";
-
-  const toolPages = tools.map((tool) => ({
-    url: `${baseUrl}${tool.href}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
-
-  return [
+  // Homepage dan halaman informasi
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
     },
-
+    {
+      url: `${baseUrl}/tools`,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
     {
       url: `${baseUrl}/about`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
-
     {
       url: `${baseUrl}/contact`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
-
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.7,
+      priority: 0.8,
     },
-
-    ...toolPages,
+    {
+      url: `${baseUrl}/disclaimer`,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/privacy-policy`,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/terms`,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
   ];
+
+  // Halaman tools
+  const toolPages: MetadataRoute.Sitemap = tools.map((tool) => ({
+    url: `${baseUrl}${tool.href}`,
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
+
+  // Halaman artikel Blog
+  const blogPages: MetadataRoute.Sitemap = blogArticles.map((article) => ({
+    url: `${baseUrl}/blog/${article.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  // Gabungkan seluruh URL
+  return [...staticPages, ...toolPages, ...blogPages];
 }

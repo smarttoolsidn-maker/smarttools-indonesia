@@ -303,9 +303,8 @@ export default function QRGeneratorPage() {
       title="QR Code Generator"
       description="Generate QR Code untuk teks, URL, WhatsApp, dan Wi-Fi secara instan."
       category="Generator"
-      badge="Popular"
-      rating="4.9"
-      users="8K+"
+
+
     >
       {/* QR Type */}
       <div className="mb-8">

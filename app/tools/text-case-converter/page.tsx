@@ -115,9 +115,8 @@ export default function TextCaseConverterPage() {
       title="Text Case Converter"
       description="Ubah teks menjadi UPPERCASE, lowercase, Title Case, atau Sentence case dengan cepat."
       category="Converter"
-      badge="Popular"
-      rating="4.9"
-      users="8K+"
+
+
     >
       {/* Input Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

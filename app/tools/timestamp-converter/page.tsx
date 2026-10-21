@@ -89,9 +89,8 @@ export default function TimestampConverterPage() {
       title="Timestamp Converter"
       description="Konversi Unix Timestamp menjadi tanggal dan waktu dengan mudah."
       category="Converter"
-      badge="Popular"
-      rating="4.9"
-      users="8K+"
+
+
     >
       {/* Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

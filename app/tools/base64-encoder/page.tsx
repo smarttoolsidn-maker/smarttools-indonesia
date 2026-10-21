@@ -100,9 +100,8 @@ export default function Base64EncoderPage() {
       title="Base64 Encoder / Decoder"
       description="Encode maupun decode Base64 secara instan untuk kebutuhan development dan data processing."
       category="Converter"
-      badge="Popular"
-      rating="4.9"
-      users="7K+"
+
+
     >
       {/* Input Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

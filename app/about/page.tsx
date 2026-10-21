@@ -1,11 +1,10 @@
-
 import type { Metadata } from "next";
 import LegalLayout from "@/components/legal/LegalLayout";
 
 export const metadata: Metadata = {
   title: "Tentang SmartTools Indonesia",
   description:
-    "Kenali SmartTools Indonesia, platform tools online gratis untuk produktivitas, pengolahan teks, dan web development.",
+    "Kenali SmartTools Indonesia, platform tools online untuk produktivitas, pengolahan teks, dan pengembangan web.",
   alternates: {
     canonical: "https://smarttools.id/about",
   },
@@ -24,39 +23,45 @@ export default function AboutPage() {
   return (
     <LegalLayout
       title="Tentang SmartTools Indonesia"
-      description="Tools online praktis untuk produktivitas dan web development."
+      description="Tools online praktis untuk produktivitas dan pengembangan web."
     >
       <h2>Selamat Datang di SmartTools Indonesia</h2>
+
       <p>
         SmartTools Indonesia adalah platform yang menyediakan berbagai
         tools online untuk membantu pengguna menyelesaikan pekerjaan
-        digital dengan lebih praktis. Berbagai alat tersedia untuk
-        kebutuhan pengolahan teks, pembuatan konten digital, dan
+        digital dengan lebih praktis. Tools yang tersedia mencakup
+        pengolahan teks, pembuatan konten digital, serta kebutuhan
         pengembangan web.
       </p>
+
       <p>
         Platform ini dikembangkan secara independen agar pengguna dapat
-        mengakses alat digital melalui browser tanpa perlu memasang
-        aplikasi tambahan untuk setiap kebutuhan.
+        mengakses berbagai alat digital melalui browser tanpa perlu
+        memasang aplikasi terpisah untuk setiap kebutuhan.
       </p>
 
       <h2>Misi Kami</h2>
+
       <p>
         Misi SmartTools Indonesia adalah menyediakan tools online yang
         mudah diakses, praktis digunakan, dan bermanfaat bagi pelajar,
         mahasiswa, developer, pekerja profesional, pelaku UMKM, serta
         masyarakat umum.
       </p>
+
       <p>
         Kami ingin membantu pengguna menyelesaikan berbagai tugas digital
         melalui satu platform yang sederhana dan mudah dijelajahi.
       </p>
 
       <h2>Apa yang Kami Sediakan?</h2>
+
       <p>
-        SmartTools Indonesia menyediakan berbagai kategori alat digital,
-        antara lain:
+        SmartTools Indonesia menyediakan beberapa kategori alat digital
+        sesuai dengan fungsi dan kebutuhan pengguna, antara lain:
       </p>
+
       <ul>
         <li>
           <strong>Text Tools:</strong> membantu menghitung, mengolah,
@@ -68,33 +73,42 @@ export default function AboutPage() {
           pengembangan web.
         </li>
         <li>
-          <strong>Generator Tools:</strong> membuat output digital
-          seperti password, QR code, dan UUID.
+          <strong>Generator Tools:</strong> membantu membuat keluaran
+          digital seperti kata sandi, QR Code, dan UUID.
         </li>
         <li>
           <strong>Converter Tools:</strong> membantu mengubah format
           teks atau data sesuai kebutuhan.
         </li>
+        <li>
+          <strong>Utility Tools:</strong> menyediakan fungsi praktis
+          untuk mendukung berbagai kebutuhan digital sehari-hari.
+        </li>
       </ul>
+
       <p>
-        Daftar fitur dapat berkembang seiring dengan pengembangan
-        platform. Pengguna dapat menjelajahi halaman tools untuk
-        mengetahui fungsi dan cara penggunaan masing-masing alat.
+        Untuk mengetahui fitur, batasan, dan cara penggunaan setiap alat,
+        kunjungi halaman Semua Tools dan buka halaman tool yang sesuai
+        dengan kebutuhan Anda.
       </p>
 
       <h2>Komitmen Pengembangan</h2>
+
       <p>
         Kami berupaya mengembangkan SmartTools Indonesia secara bertahap
         dengan memperhatikan kemudahan penggunaan, kejelasan informasi,
         dan pengalaman pengguna.
       </p>
+
       <p>
-        Masukan, saran, serta laporan kendala dari pengguna merupakan
-        bagian yang dapat membantu kami mengevaluasi dan meningkatkan
-        kualitas platform.
+        Masukan, saran, dan laporan kendala dari pengguna dapat membantu
+        kami mengevaluasi serta meningkatkan kualitas platform. Kami juga
+        berupaya menyajikan informasi yang jelas mengenai fungsi tools
+        dan penggunaannya.
       </p>
 
       <h2>Pengelolaan Platform</h2>
+
       <p>
         SmartTools Indonesia saat ini dikembangkan secara independen.
         Seiring pertumbuhan platform, pengelolaan dan pengembangannya
@@ -103,13 +117,28 @@ export default function AboutPage() {
       </p>
 
       <h2>Hubungi Kami</h2>
+
       <p>
-        Jika Anda memiliki pertanyaan, saran, atau menemukan kendala
-        saat menggunakan tools, silakan hubungi kami melalui email:
+        Jika Anda memiliki pertanyaan, saran, menemukan kendala, atau
+        ingin menyampaikan masukan mengenai SmartTools Indonesia,
+        silakan hubungi kami melalui email berikut:
       </p>
+
       <p>
+        <strong>Email: </strong>
         <a href="mailto:smarttoolsidn@gmail.com">
           smarttoolsidn@gmail.com
+        </a>
+      </p>
+
+      <p>
+        <strong>Website: </strong>
+        <a
+          href="https://smarttools.id"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://smarttools.id
         </a>
       </p>
     </LegalLayout>

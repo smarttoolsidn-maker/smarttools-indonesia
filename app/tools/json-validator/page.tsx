@@ -65,9 +65,8 @@ export default function JSONValidatorPage() {
       title="JSON Validator"
       description="Validasi format JSON secara instan dan pastikan data JSON kamu memiliki struktur yang benar."
       category="Developer"
-      badge="Popular"
-      rating="4.9"
-      users="5K+"
+
+
     >
       {/* Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

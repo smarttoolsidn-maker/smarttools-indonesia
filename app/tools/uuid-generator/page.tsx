@@ -53,9 +53,8 @@ export default function UUIDGeneratorPage() {
       title="UUID Generator"
       description="Generate UUID v4 secara instan dan aman."
       category="Generator"
-      badge="Popular"
-      rating="4.9"
-      users="6K+"
+
+
     >
       <ToolResult
         label="Generated UUID"

@@ -74,9 +74,8 @@ export default function JWTDecoderPage() {
       title="JWT Decoder"
       description="Decode JWT Payload secara instan untuk membantu membaca data token."
       category="Developer"
-      badge="Popular"
-      rating="4.9"
-      users="5K+"
+
+
     >
       {/* Input Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

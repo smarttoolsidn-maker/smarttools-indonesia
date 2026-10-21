@@ -69,9 +69,8 @@ export default function WordCounterPage() {
       title="Word Counter"
       description="Hitung jumlah kata, karakter, baris, dan estimasi waktu baca secara instan."
       category="Utility"
-      badge="Popular"
-      rating="4.9"
-      users="9K+"
+
+
     >
       {/* Editor Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

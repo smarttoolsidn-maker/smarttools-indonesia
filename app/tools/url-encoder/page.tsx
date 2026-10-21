@@ -99,9 +99,8 @@ export default function URLEncoderPage() {
       title="URL Encoder / Decoder"
       description="Encode atau decode URL secara instan untuk kebutuhan web development."
       category="Converter"
-      badge="Popular"
-      rating="4.9"
-      users="4K+"
+
+
     >
       {/* Input Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

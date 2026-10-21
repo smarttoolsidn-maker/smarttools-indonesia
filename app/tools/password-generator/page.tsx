@@ -87,9 +87,8 @@ export default function PasswordGeneratorPage() {
       title="Password Generator"
       description="Generate password yang kuat, aman, dan dapat dikustomisasi."
       category="Generator"
-      badge="Popular"
-      rating="4.9"
-      users="12K+"
+
+
     >
       <PasswordOutput
         password={password}

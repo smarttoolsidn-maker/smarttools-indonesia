@@ -67,9 +67,8 @@ export default function HashGeneratorPage() {
       title="SHA-256 Hash Generator"
       description="Generate hash SHA-256 dari teks secara instan."
       category="Developer"
-      badge="Popular"
-      rating="4.9"
-      users="5K+"
+
+
     >
       {/* Input Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

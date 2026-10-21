@@ -75,9 +75,8 @@ export default function MarkdownPreviewPage() {
       title="Markdown Preview"
       description="Konversi Markdown menjadi HTML dan lihat hasilnya dengan mudah."
       category="Developer"
-      badge="Popular"
-      rating="4.9"
-      users="5K+"
+
+
     >
       {/* Input Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

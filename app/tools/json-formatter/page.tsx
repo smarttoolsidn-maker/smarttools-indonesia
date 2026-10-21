@@ -96,9 +96,8 @@ export default function JSONFormatterPage() {
       title="JSON Formatter"
       description="Format, beautify, dan minify JSON secara instan."
       category="Developer"
-      badge="Popular"
-      rating="4.9"
-      users="6K+"
+
+
     >
       {/* Input Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

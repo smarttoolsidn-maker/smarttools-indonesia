@@ -20,7 +20,9 @@ export default function FeaturedTools() {
         </h2>
 
         <p className="mt-3 text-slate-500 dark:text-slate-400">
-          Tool pilihan yang paling sering digunakan pengguna SmartTools Indonesia.
+          <p>
+  Jelajahi berbagai tools yang dapat membantu kebutuhan digital sehari-hari.
+</p>
         </p>
 
       </div>

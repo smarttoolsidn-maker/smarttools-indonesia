@@ -76,9 +76,8 @@ export default function ColorConverterPage() {
       title="Color Converter"
       description="Konversi kode warna HEX menjadi RGB dengan cepat dan mudah."
       category="Converter"
-      badge="Popular"
-      rating="4.9"
-      users="4K+"
+
+
     >
       {/* Header */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

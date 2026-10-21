@@ -66,9 +66,8 @@ export default function LoremIpsumPage() {
       title="Lorem Ipsum Generator"
       description="Generate Lorem Ipsum dengan jumlah kata yang dapat diatur."
       category="Generator"
-      badge="Popular"
-      rating="4.9"
-      users="6K+"
+
+
     >
       {/* Generator Header */}
       <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
