@@ -1,8 +1,10 @@
+
 import LegalLayout from "@/components/legal/LegalLayout";
 
 export const metadata = {
   title: "Contact",
-  description: "Hubungi SmartTools Indonesia.",
+  description:
+    "Hubungi SmartTools Indonesia untuk pertanyaan, masukan, laporan bug, dan peluang kolaborasi.",
 };
 
 export default function ContactPage() {
@@ -16,23 +18,40 @@ export default function ContactPage() {
       <p>
         Jika Anda memiliki pertanyaan, menemukan bug, atau ingin memberikan
         saran untuk SmartTools Indonesia, silakan hubungi kami melalui email.
+        Kami akan berusaha meninjau setiap pesan yang masuk.
       </p>
 
       <ul>
         <li>
-          <strong>Email:</strong> hello@smarttools.id
+          <strong>Email: </strong>
+          <a href="mailto:smarttoolsidn@gmail.com">
+            smarttoolsidn@gmail.com
+          </a>
         </li>
 
         <li>
-          <strong>Website:</strong> https://smarttools.id
+          <strong>Website: </strong>
+          <a
+            href="https://smarttools.id"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            https://smarttools.id
+          </a>
         </li>
       </ul>
 
-      <h2>Masukan & Kolaborasi</h2>
+      <h2>Masukan &amp; Kolaborasi</h2>
 
       <p>
-        Kami terbuka terhadap masukan, ide pengembangan tools baru, maupun
-        peluang kolaborasi untuk meningkatkan SmartTools Indonesia.
+        Kami terbuka terhadap masukan, ide pengembangan tools baru, laporan
+        kendala, maupun peluang kolaborasi untuk meningkatkan kualitas dan
+        pengalaman pengguna SmartTools Indonesia.
+      </p>
+
+      <p>
+        Untuk membantu kami memahami kebutuhan Anda, sertakan penjelasan
+        mengenai pertanyaan atau kendala yang dialami saat menghubungi kami.
       </p>
     </LegalLayout>
   );

@@ -16,15 +16,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://smarttools.id"),
-
   title: {
     default: "SmartTools Indonesia | Tools Online Gratis",
     template: "%s | SmartTools Indonesia",
   },
-
   description:
     "Gunakan tools online gratis dari SmartTools Indonesia: penghitung kata, generator password, QR Code, formatter JSON, dan berbagai alat praktis untuk kebutuhan sehari-hari.",
-
   keywords: [
     "smarttools indonesia",
     "tools online gratis",
@@ -46,26 +43,17 @@ export const metadata: Metadata = {
     "markdown preview",
     "developer tools",
   ],
-
-  authors: [
-    {
-      name: "Muhammad Iqbal",
-    },
-  ],
-
+  authors: [{ name: "Muhammad Iqbal" }],
   creator: "Muhammad Iqbal",
   publisher: "SmartTools Indonesia",
   applicationName: "SmartTools Indonesia",
-
   robots: {
     index: true,
     follow: true,
   },
-
   alternates: {
     canonical: "/",
   },
-
   openGraph: {
     title: "SmartTools Indonesia | Tools Online Gratis",
     description:
@@ -83,7 +71,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     title: "SmartTools Indonesia | Tools Online Gratis",
@@ -103,9 +90,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
