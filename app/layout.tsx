@@ -56,6 +56,10 @@ export const metadata: Metadata = {
     follow: true,
   },
 
+  other: {
+    "google-adsense-account": "ca-pub-3052601950501750",
+},
+
   // Canonical ditetapkan pada masing-masing halaman.
   // Metadata sosial spesifik akan diperiksa per halaman.
 
